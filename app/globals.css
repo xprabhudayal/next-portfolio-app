@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: #000000;
+    --color-text: #FFFFFF;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-black text-white font-switzer antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-switzer font-medium tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  p {
+    @apply font-light leading-relaxed;
+  }
+}
+
+/* GSAP animations will be defined here */
+.page-transition-enter {
+  opacity: 0;
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  @apply fixed pointer-events-none z-50 hidden md:block;
+  width: 40px;
+  height: 40px;
+  mix-blend-mode: difference;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  @apply fixed inset-0 pointer-events-none opacity-[0.03] z-10;
+  background-image: url('/noise.png');
+  background-repeat: repeat;
+}
