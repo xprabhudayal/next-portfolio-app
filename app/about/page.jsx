@@ -53,44 +53,43 @@ export default function About() {
 
   return (
     <main className="min-h-screen flex flex-col relative">
-      <AnimatedBackground />
-      <Navbar />
+      <Navbar className="absolute top-0 left-0 w-full z-20"/>
       
       <div 
         ref={contentRef}
-        className="container max-w-screen-xl mx-auto px-6 z-10 mt-24 md:mt-32 pb-24"
+        className="container top-0 bottom-0 md:mt-32"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-          {/* Left column: About text */}
+        <div className="absolute top-0 left-0 w-full z-0">
+          <DraggableLanyard
+            className='w-screen h-screen pointer-events-auto select-none'
+          />
+        </div>
+
+        <div className="pointer-events-none relative z-20 h-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center px-12">
           <div ref={textRef} className="text-column">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-8">About Me</h1>
             
             <p className="text-lg md:text-xl font-light opacity-80 mb-8">
-              I'm a creative developer and digital experience designer focused on crafting innovative web applications that seamlessly blend artistry with technical precision.
+            I am a proactive and communicative individual currently engaged in a Research Internship at ESIEA Paris remotely via India.
             </p>
             
             <p className="text-base md:text-lg font-light opacity-70 mb-8">
-              With a background spanning both design and development, I bring a unique perspective to each project, prioritizing user experience while implementing cutting-edge technical solutions.
+            With a solid foundation in C++, React JS, Python, and Data Structures and Algorithms, I enjoy tackling complex problems and finding innovative solutions. 
             </p>
             
             <p className="text-base md:text-lg font-light opacity-70 mb-8">
-              My approach combines minimalist aesthetics with interactive elements and thoughtful animations to create engaging digital experiences that leave a lasting impression.
+              My approach combines minimalist aesthetics with interactive elements to create breakthrough digital experiences that leave a lasting impression.
             </p>
             
             <p className="text-base md:text-lg font-light opacity-70">
-              Currently focused on frontend development with React, Next.js and exploring the intersection of creative coding and practical application development.
+              Currently being focused on frontend development with React, Next.js and exploring the intersection of AI and practical application development.
             </p>
           </div>
           
-          {/* Right column: Draggable lanyard */}
-          <div className="lanyard-column flex justify-center md:justify-end mt-8 md:mt-0">
-            <DraggableLanyard 
-              name="Your Name"
-              title="Creative Developer"
-              imageUrl="/profile-photo.jpg"
-            />
-          </div>
         </div>
+
+        
+        
       </div>
     </main>
   );

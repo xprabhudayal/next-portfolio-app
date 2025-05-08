@@ -1,10 +1,8 @@
 import Navbar from '../components/Navbar';
-import AnimatedBackground from '../components/AnimatedBackground';
 
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      <AnimatedBackground />
       <Navbar />
       
       <div className="container max-w-screen-xl mx-auto px-6 z-10 mt-24">
