@@ -122,7 +122,7 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
         }
     }
 
-    const audioData = message.serverContent?.modelTurn?.parts[0]?.inlineData.data;
+    const audioData = message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
     if (audioData && outputAudioContextRef.current) {
         const outputAudioContext = outputAudioContextRef.current;
         nextStartTimeRef.current = Math.max(nextStartTimeRef.current, outputAudioContext.currentTime);

@@ -7,7 +7,9 @@ import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint, RapierRigidBody } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
+// Extend THREE with MeshLine components
 extend({ MeshLineGeometry, MeshLineMaterial });
+
 useGLTF.preload('/lanyard.glb');
 useTexture.preload('/band.jpg');
 
@@ -41,7 +43,7 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
 }
 
 function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
-  const band = useRef<any>();
+  const band = useRef<any>(null);
   const fixed = useRef<RapierRigidBody>(null!);
   const j1 = useRef<RapierRigidBody>(null!);
   const j2 = useRef<RapierRigidBody>(null!);
