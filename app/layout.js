@@ -1,35 +1,33 @@
+// app/layout.tsx
+'use client';
+
 import './globals.css';
+import Navbar from '../components/Navbar';
+import TalkAboutMeButton from '../components/TalkAboutMeButton';
+import LiveChatModal from '../components/LiveChatModal';
+import { useState } from 'react';
 
-export const metadata = {
-  title: 'Your Name - Creative Developer',
-  description: 'Personal portfolio showcasing creative development work and professional experience',
-  openGraph: {
-    title: 'Your Name - Creative Developer',
-    description: 'Personal portfolio showcasing creative development work and professional experience',
-    url: 'https://yourname.dev',
-    siteName: 'Your Name Portfolio',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Your Name - Creative Developer',
-      },
-    ],
-    locale: 'en-US',
-    type: 'website',
-  },
-};
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [showModal, setShowModal] = useState(false);
 
-export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet" />
-        <link rel="preload" href="https://fonts.cdnfonts.com/css/switzer" as="style" />
+        <title>Prabhudayal Vaishnav - AI Engineer & Full-Stack Developer</title>
+        <meta
+          name="description"
+          content="Portfolio of Prabhudayal Vaishnav - AI Engineer, Full-Stack Developer, and Research Intern at ESIEA Paris"
+        />
       </head>
-      <body className="bg-black text-white font-switzer">
-        {children}
+      <body>
+        <Navbar />
+        <main className="w-full h-screen overflow-hidden">{children}</main>
+        <TalkAboutMeButton onClick={() => setShowModal(true)} />
+        {showModal && <LiveChatModal onClose={() => setShowModal(false)} />}
       </body>
     </html>
   );
