@@ -3,9 +3,9 @@ import { GoogleGenAI, LiveSession, LiveServerMessage, Modality } from '@google/g
 export const getGeminiAI = () => {
     // Re-initializing GoogleGenAI ensures it picks up the latest API key
     // if the user has just selected one via a dialog.
-    const apiKey = process.env.API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     if (!apiKey) {
-        throw new Error("API_KEY environment variable not set");
+        throw new Error("NEXT_PUBLIC_API_KEY environment variable not set. Please add it to your .env file.");
     }
     return new GoogleGenAI({ apiKey });
 }
