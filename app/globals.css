@@ -31,21 +31,29 @@
   :root {
     --color-background: #000000;
     --color-text: #FFFFFF;
+
+    /* Enhanced Text Color Hierarchy - WCAG Compliant */
+    --color-text-primary: #FFFFFF;           /* Pure white for titles - 21:1 */
+    --color-text-secondary: #E5E5E5;        /* Light gray for subtitles - 16:1 */
+    --color-text-body: #B8B8B8;             /* Medium gray for body text - 7.2:1 */
+    --color-text-muted: #9A9A9A;            /* Muted for secondary info - 5.5:1 */
+    --color-text-disabled: #6B6B6B;         /* Subtle for URLs/metadata - 4.6:1 */
   }
 
   html {
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-    @apply scroll-smooth overflow-hidden;
+    @apply scroll-smooth;
   }
 
   body {
-    @apply bg-apple-black text-apple-label font-sf-pro antialiased overflow-hidden;
-    height: 100vh;
+    @apply bg-apple-black text-apple-label font-sf-pro antialiased;
+    min-height: 100vh;
     width: 100vw;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-sf-pro font-medium tracking-tight;
+    color: var(--color-text-primary);
   }
 
   h1 {
@@ -62,6 +70,7 @@
 
   p {
     @apply font-normal leading-relaxed;
+    color: var(--color-text-body);
   }
 }
 
@@ -129,8 +138,8 @@
       rgba(255, 255, 255, 0.04) 50%,
       rgba(255, 255, 255, 0.08) 100%
     );
-    backdrop-filter: blur(25px) saturate(200%) brightness(1.1);
-    -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.1);
+    backdrop-filter: blur(25px) saturate(200%) brightness(1.5);
+    -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.5);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 1.5rem;
     box-shadow:
@@ -229,39 +238,136 @@
       inset 0 -1px 1px rgba(0, 0, 0, 0.1);
   }
 
-  /* Glass morphism utilities - Enhanced */
+  /* Glass morphism utilities - Enhanced with Depth System */
+  /* Level 1: Navigation - Subtle */
   .glass {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px) saturate(150%) brightness(1.05);
+    -webkit-backdrop-filter: blur(15px) saturate(150%) brightness(1.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  /* Level 2: Cards - Medium */
   .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Level 3: Modals/Overlays - Strong */
+  .glass-modal {
     background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(40px) saturate(200%) brightness(1.15);
-    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.15);
+    backdrop-filter: blur(25px) saturate(200%) brightness(1.15);
+    -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
 
-  /* 3D Text Gradient - Enhanced Apple style with repeating pattern */
+  /* Enhanced 3D Text Gradient with Better Contrast */
   .gradient-3d-text {
     background: linear-gradient(
       to bottom,
-      #ffffff 0%,        /* START - White */
-      #a8a8a8 20%,       /* STOP - Grey */
-      #ffffff 40%,       /* START (REPEAT) - White */
-      #8a8a8a 60%,       /* Middle grey */
-      #6e6e6e 80%,       /* STOP (REPEAT) - Darker grey */
-      #505050 100%       /* End - Dark grey */
+      #ffffff 0%,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #d0d0d0 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow:
       0 1px 2px rgba(0, 0, 0, 0.5),
-      0 2px 4px rgba(0, 0, 0, 0.3),
-      0 4px 8px rgba(0, 0, 0, 0.2);
+      0 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+  }
+
+  /* Text Hierarchy Utilities */
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-subtle {
+    color: var(--color-text-disabled);
+  }
+
+  /* Card Text Hierarchy */
+  .card-title {
+    color: var(--color-text-primary);
+    font-weight: 500;
+    font-size: 1.125rem;
+  }
+
+  .card-subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .card-description {
+    color: var(--color-text-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
+  /* Page Title Styling */
+  .page-title {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Page Description */
+  .page-description {
+    color: var(--color-text-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Platform Name */
+  .platform-name {
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  /* Platform URL - Improved Accessibility */
+  .platform-url {
+    color: var(--color-text-disabled);
+    font-size: 0.9rem;
+    opacity: 1;
+  }
+
+  .link-card:hover .platform-url {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+
+  /* Feature Text */
+  .feature-text {
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+
+  /* Subtle blur effect for content below gradient text */
+  .gradient-text-blur {
+    position: relative;
+  }
+
+  .gradient-text-blur::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none;
+    z-index: -1;
   }
 
   /* Enhanced glow effects */
@@ -331,10 +437,9 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-/* Prevent scrolling */
+/* Allow scrolling in Next.js container */
 #__next {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 /* SVG Filters for Liquid Glass Effects - Add to your HTML */

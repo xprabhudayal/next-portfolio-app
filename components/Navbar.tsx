@@ -23,21 +23,24 @@ export default function Navbar({ currentPage }: NavbarProps) {
 
   return (
     <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-[100]">
-      <div className="liquid-glass rounded-apple-lg px-8 py-4 flex items-center gap-8 shadow-glass">
+      <div className="glass rounded-apple-lg px-6 py-3 flex items-center gap-6 shadow-glass">
         {navItems.map((item) => (
           <Link
             key={item.path}
             href={item.path}
             className={`
-              text-sm font-medium tracking-wide transition-all duration-300
+              relative text-sm font-medium tracking-wide transition-all duration-300
               ${
                 isActive(item.path)
-                  ? 'text-apple-label scale-110'
-                  : 'text-apple-label-secondary hover:text-apple-label hover:scale-105'
+                  ? 'text-apple-label'
+                  : 'text-apple-label-secondary hover:text-apple-label'
               }
             `}
           >
             {item.name}
+            {isActive(item.path) && (
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full" />
+            )}
           </Link>
         ))}
       </div>

@@ -9,14 +9,14 @@ export default function ProjectsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="w-full h-full bg-apple-black overflow-y-auto pt-32 pb-20 px-8">
+    <div className="w-full h-full bg-apple-black overflow-y-auto pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-16 text-center">
-          <h1 className="text-6xl font-bold mb-4 gradient-3d-text">
+        <div className="mb-12 sm:mb-16 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-3d-text gradient-text-blur page-title">
             Projects
           </h1>
-          <p className="text-apple-label-secondary text-lg">
+          <p className="page-description px-4">
             A collection of my work in AI, full-stack development, and open source
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
               >
                 {/* Image */}
                 {project.image && (
-                  <div className="relative w-full h-64 bg-apple-gray-200">
+                  <div className="relative w-full h-48 sm:h-56 md:h-64 bg-apple-gray-200">
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -52,14 +52,14 @@ export default function ProjectsPage() {
                 )}
 
                 {/* Content */}
-                <div className="p-6 space-y-4">
+                <div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
                   {/* Title with External Link */}
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-2xl font-semibold text-apple-label group-hover:text-accent-purple transition-colors duration-300">
+                    <h3 className="card-title text-xl sm:text-2xl group-hover:text-accent-purple transition-colors duration-300">
                       {project.title}
                     </h3>
                     <ExternalLink
-                      className={`w-5 h-5 text-apple-label-tertiary group-hover:text-accent-blue transition-all duration-300 ${
+                      className={`w-4 h-4 sm:w-5 sm:h-5 text-subtle group-hover:text-accent-blue transition-all duration-300 flex-shrink-0 ${
                         hoveredIndex === index ? 'translate-x-1 -translate-y-1' : ''
                       }`}
                     />
@@ -70,7 +70,7 @@ export default function ProjectsPage() {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-xs font-medium rounded-full glass text-apple-label-secondary"
+                        className="px-2.5 sm:px-3 py-1 text-xs font-medium rounded-full glass text-muted"
                       >
                         {tech}
                       </span>
@@ -78,16 +78,16 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-apple-label-secondary text-sm leading-relaxed">
+                  <p className="card-description text-sm">
                     {project.description}
                   </p>
 
                   {/* Key Points */}
                   {project.points.length > 0 && (
-                    <ul className="space-y-2 text-sm text-apple-label-tertiary">
+                    <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-muted">
                       {project.points.slice(0, isLarge ? 3 : 2).map((point, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="text-accent-purple mt-1">•</span>
+                          <span className="text-accent-purple mt-1 flex-shrink-0">•</span>
                           <span>{point}</span>
                         </li>
                       ))}

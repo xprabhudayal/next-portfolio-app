@@ -1,7 +1,7 @@
 'use client';
 
 import * as THREE from 'three';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint, RapierRigidBody } from '@react-three/rapier';
@@ -10,6 +10,7 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 // Extend THREE with MeshLine components
 extend({ MeshLineGeometry, MeshLineMaterial });
 
+// Preload assets (important for performance)
 useGLTF.preload('/lanyard.glb');
 useTexture.preload('/band.jpg');
 
@@ -24,14 +25,43 @@ interface BandProps {
 
 export default function DraggableLanyard({ className = '' }: DraggableLanyardProps) {
   return (
-    <div className={`${className}`}>
-      <Canvas camera={{ position: [0, 0, 10], fov: 22 }}>
+    <div
+      className={`${className}`}
+      style={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      <Canvas
+        camera={{ position: [0, 0, 10], fov: 25 }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance',
+        }}
+        style={{
+          background: 'transparent',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
+        onCreated={() => {
+          console.log('✓ Canvas created successfully');
+        }}
+      >
         <ambientLight intensity={Math.PI} />
-        <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
-          <Band />
-        </Physics>
-        <Environment background blur={0.75}>
-          <color attach="background" args={['black']} />
+
+        {/* CRITICAL: Physics MUST be wrapped in Suspense (per @react-three/rapier docs) */}
+        <Suspense fallback={null}>
+          <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
+            <Band />
+          </Physics>
+        </Suspense>
+        <Environment background={false} blur={0.75}>
           <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
           <Lightformer intensity={3} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
           <Lightformer intensity={3} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
@@ -63,9 +93,26 @@ function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
     linearDamping: 2,
   };
 
+  // Load GLTF and texture (hooks will suspend until loaded)
   const { nodes, materials } = useGLTF('/lanyard.glb') as any;
   const texture = useTexture('/band.jpg');
   const { width, height } = useThree((state) => state.size);
+
+  // Log successful load with details
+  useEffect(() => {
+    console.log('✓ 3D assets loaded successfully');
+    console.log('  - GLTF nodes:', Object.keys(nodes));
+    console.log('  - Materials:', Object.keys(materials));
+    console.log('  - Texture:', texture);
+
+    // Debug: Check if card geometry exists
+    if (nodes.card) {
+      console.log('  - Card geometry found:', nodes.card.geometry);
+    } else {
+      console.error('  ✗ Card geometry NOT found in GLTF!');
+    }
+  }, [nodes, materials, texture]);
+
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([
@@ -135,7 +182,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
 
   return (
     <>
-      <group position={[0, 4, 0]}>
+      <group position={[0, 1, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />

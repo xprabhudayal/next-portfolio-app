@@ -92,7 +92,7 @@ export default function RootLayout({
         </svg>
 
         <Navbar />
-        <main className="w-full h-screen overflow-hidden">{children}</main>
+        <main className="w-full min-h-screen">{children}</main>
         <TalkAboutMeButton onClick={() => setShowModal(true)} />
         {showModal && <LiveChatModal onClose={() => setShowModal(false)} />}
       </body>

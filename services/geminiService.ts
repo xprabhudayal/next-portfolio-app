@@ -20,13 +20,16 @@ export const startLiveConversation = async (
     systemInstruction: string
 ): Promise<LiveSession> => {
     const ai = getGeminiAI();
+
     const sessionPromise = ai.live.connect({
         model: 'gemini-2.5-flash-native-audio-preview-09-2025',
         callbacks: callbacks,
         config: {
             responseModalities: [Modality.AUDIO],
             speechConfig: {
-                voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } },
+                voiceConfig: {
+                    prebuiltVoiceConfig: { voiceName: 'Puck' }
+                },
             },
             inputAudioTranscription: {},
             outputAudioTranscription: {},
@@ -34,29 +37,8 @@ export const startLiveConversation = async (
             tools: [{ googleSearch: {} }],
         },
     });
+
     return sessionPromise;
 };
 
-export const generateImage = async (prompt: string): Promise<string> => {
-    try {
-        const ai = getGeminiAI();
-        const response = await ai.models.generateImages({
-            model: 'imagen-4.0-generate-001',
-            prompt: `Create a visually stunning, abstract, minimalist, premium piece of cover art for a software project. Theme: ${prompt}. Use a dark color palette with subtle, glowing accents, reminiscent of Apple's design aesthetic.`,
-            config: {
-                numberOfImages: 1,
-                outputMimeType: 'image/jpeg',
-                aspectRatio: '16:9',
-            },
-        });
 
-        if (response.generatedImages && response.generatedImages.length > 0) {
-            const base64ImageBytes = response.generatedImages[0].image.imageBytes;
-            return `data:image/jpeg;base64,${base64ImageBytes}`;
-        }
-        throw new Error("No image generated.");
-    } catch (error) {
-        console.error("Image generation failed:", error);
-        throw error;
-    }
-};

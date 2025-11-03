@@ -18,37 +18,32 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="w-full h-full bg-apple-black flex items-center justify-center px-8">
-      <div className="text-center max-w-2xl">
-        {/* Icon */}
-        <div className="mb-8 flex justify-center">
-          <div className="w-32 h-32 rounded-full glass-strong flex items-center justify-center glow-blue">
-            <Download className="w-16 h-16 text-accent-blue" />
-          </div>
-        </div>
-
+    <div className="w-full min-h-full bg-apple-black overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16">
+      <div className="text-center max-w-2xl mx-auto">
         {/* Heading */}
-        <h1 className="text-6xl font-bold mb-6 gradient-3d-text">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-3d-text gradient-text-blur page-title">
           Resume
         </h1>
-        <p className="text-apple-label-secondary text-lg mb-12 leading-relaxed">
+        <p className="page-description mb-8 px-4">
           Download my resume to learn more about my experience, skills, and achievements
         </p>
 
         {/* Download Button */}
         <button
           onClick={handleDownload}
-          className="group liquid-glass rounded-apple px-10 py-5 inline-flex items-center gap-4 shadow-glass transition-all duration-500 hover:scale-105 hover:shadow-glow"
+          className="group liquid-glass rounded-apple px-8 sm:px-10 py-4 sm:py-5 inline-flex items-center gap-3 sm:gap-4 shadow-glass transition-all duration-300 hover:scale-[1.02] hover:shadow-glow mb-8"
         >
-          <Download className="w-6 h-6 text-accent-blue group-hover:animate-bounce" />
-          <span className="text-xl font-semibold text-apple-label">Download Resume</span>
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-strong flex items-center justify-center transition-all duration-300 group-hover:bg-accent-blue/10">
+            <Download className="w-5 h-5 sm:w-6 sm:h-6 text-accent-blue group-hover:animate-bounce" />
+          </div>
+          <span className="text-lg sm:text-xl font-semibold platform-name">Download Resume</span>
         </button>
 
         {/* Additional Info */}
         <div className="mt-12 space-y-4">
-          <div className="glass rounded-apple p-6">
-            <h3 className="text-apple-label font-medium mb-2">What's Inside</h3>
-            <ul className="text-apple-label-secondary text-sm space-y-2">
+          <div className="glass rounded-apple p-5 sm:p-6">
+            <h3 className="feature-text font-medium mb-3 text-base sm:text-lg">What's Inside</h3>
+            <ul className="text-muted text-sm space-y-2 text-left">
               <li>• Research Internship at ESIEA Paris</li>
               <li>• 7+ AI/ML Projects including Voice AI Systems</li>
               <li>• Full-stack Development Experience</li>
@@ -61,7 +56,7 @@ export default function ResumePage() {
         {/* Navigation Back */}
         <button
           onClick={() => router.push('/')}
-          className="mt-8 text-apple-label-secondary hover:text-accent-purple transition-colors duration-300"
+          className="mt-8 text-muted hover:text-accent-purple transition-colors duration-300 text-sm sm:text-base"
         >
           ← Back to Home
         </button>
