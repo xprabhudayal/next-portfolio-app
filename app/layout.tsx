@@ -5,6 +5,7 @@ import './globals.css';
 import Navbar from '../components/Navbar';
 import TalkAboutMeButton from '../components/TalkAboutMeButton';
 import LiveChatModal from '../components/LiveChatModal';
+import FlowingAurora from '../components/FlowingAurora';
 import { useState } from 'react';
 
 export default function RootLayout({
@@ -91,8 +92,17 @@ export default function RootLayout({
           </filter>
         </svg>
 
-        <Navbar />
-        <main className="w-full min-h-screen">{children}</main>
+        {/* Flowing Aurora Background - Present on all pages */}
+        <div className="fixed inset-0 z-0">
+          <FlowingAurora />
+        </div>
+
+        {/* Main content wrapper */}
+        <div className="relative z-10">
+          <Navbar />
+          <main className="w-full min-h-screen">{children}</main>
+        </div>
+
         <TalkAboutMeButton onClick={() => setShowModal(true)} />
         {showModal && <LiveChatModal onClose={() => setShowModal(false)} />}
       </body>

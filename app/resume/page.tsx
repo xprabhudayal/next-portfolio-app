@@ -18,7 +18,7 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="w-full min-h-full bg-apple-black overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16">
+    <div className="w-full min-h-full overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16">
       <div className="text-center max-w-2xl mx-auto">
         {/* Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-3d-text gradient-text-blur page-title">
@@ -37,28 +37,6 @@ export default function ResumePage() {
             <Download className="w-5 h-5 sm:w-6 sm:h-6 text-accent-blue group-hover:animate-bounce" />
           </div>
           <span className="text-lg sm:text-xl font-semibold platform-name">Download Resume</span>
-        </button>
-
-        {/* Additional Info */}
-        <div className="mt-12 space-y-4">
-          <div className="glass rounded-apple p-5 sm:p-6">
-            <h3 className="feature-text font-medium mb-3 text-base sm:text-lg">What's Inside</h3>
-            <ul className="text-muted text-sm space-y-2 text-left">
-              <li>• Research Internship at ESIEA Paris</li>
-              <li>• 7+ AI/ML Projects including Voice AI Systems</li>
-              <li>• Full-stack Development Experience</li>
-              <li>• Open Source Contributions</li>
-              <li>• Hackathon Winner - IIM Nagpur</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Navigation Back */}
-        <button
-          onClick={() => router.push('/')}
-          className="mt-8 text-muted hover:text-accent-purple transition-colors duration-300 text-sm sm:text-base"
-        >
-          ← Back to Home
         </button>
       </div>
     </div>

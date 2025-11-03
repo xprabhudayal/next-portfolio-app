@@ -43,12 +43,14 @@
   html {
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
     @apply scroll-smooth;
+    background: #000000;
   }
 
   body {
-    @apply bg-apple-black text-apple-label font-sf-pro antialiased;
+    @apply text-apple-label font-sf-pro antialiased;
     min-height: 100vh;
     width: 100vw;
+    background: transparent;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -134,19 +136,19 @@
     position: relative;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.04) 50%,
-      rgba(255, 255, 255, 0.08) 100%
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.10) 50%,
+      rgba(255, 255, 255, 0.14) 100%
     );
-    backdrop-filter: blur(25px) saturate(200%) brightness(1.5);
-    -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.5);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
+    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 1.5rem;
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
     overflow: hidden;
   }
 
@@ -192,15 +194,15 @@
 
   /* Apple Vision Pro Style Glass */
   .vision-glass {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
-    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(50px) saturate(200%) brightness(1.25);
+    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.25);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 2rem;
     box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.4),
-      0 8px 16px rgba(0, 0, 0, 0.2),
-      inset 0 2px 4px rgba(255, 255, 255, 0.3),
+      0 20px 40px rgba(0, 0, 0, 0.5),
+      0 8px 16px rgba(0, 0, 0, 0.3),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
       inset 0 -2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
@@ -239,28 +241,37 @@
   }
 
   /* Glass morphism utilities - Enhanced with Depth System */
-  /* Level 1: Navigation - Subtle */
+  /* Level 1: Navigation - Subtle but visible */
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px) saturate(150%) brightness(1.05);
-    -webkit-backdrop-filter: blur(15px) saturate(150%) brightness(1.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  /* Level 2: Cards - Medium */
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  /* Level 3: Modals/Overlays - Strong */
-  .glass-modal {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(25px) saturate(200%) brightness(1.15);
-    -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.15);
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px) saturate(200%) brightness(1.3);
+    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.3);
     border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Level 2: Cards - Medium with good visibility */
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
+    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Level 3: Modals/Overlays - Strong and prominent */
+  .glass-modal {
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(50px) saturate(200%) brightness(1.4);
+    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.6),
+      inset 0 2px 0 rgba(255, 255, 255, 0.35);
   }
 
   /* Enhanced 3D Text Gradient with Better Contrast */
@@ -394,10 +405,10 @@
 
   /* Apple-style button glass */
   .glass-button {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.2);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 1rem;
     transition: all 0.3s ease;
     position: relative;
@@ -405,10 +416,10 @@
   }
 
   .glass-button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   }
 
   .glass-button::after {
