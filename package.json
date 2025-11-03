@@ -9,13 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/genai": "^1.28.0",
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.4.0",
+    "@react-three/rapier": "^2.2.0",
     "autoprefixer": "^10.4.21",
     "gsap": "^3.12.7",
+    "lucide-react": "^0.508.0",
+    "meshline": "^3.3.1",
     "next": "15.3.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind": "3",
-    "tailwindcss": "3"
+    "tailwindcss": "3",
+    "three": "^0.181.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/three": "^0.181.0",
+    "typescript": "^5.9.3"
   }
 }
