@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* SF Pro Display Font Family */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFPRODISPLAYREGULAR.OTF') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFPRODISPLAYMEDIUM.OTF') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --color-background: #000000;
@@ -9,64 +34,74 @@
   }
 
   html {
-    @apply scroll-smooth;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply scroll-smooth overflow-hidden;
   }
 
   body {
-    @apply bg-black text-white font-switzer antialiased;
+    @apply bg-apple-black text-apple-label font-sf-pro antialiased overflow-hidden;
+    height: 100vh;
+    width: 100vw;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-switzer font-medium tracking-tight;
+    @apply font-sf-pro font-medium tracking-tight;
   }
-  
+
   h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl;
+  }
+
+  h2 {
     @apply text-4xl md:text-5xl lg:text-6xl;
   }
-  
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-  
+
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-3xl md:text-4xl;
   }
-  
+
   p {
-    @apply font-light leading-relaxed;
+    @apply font-normal leading-relaxed;
   }
 }
 
-/* GSAP animations will be defined here */
-.page-transition-enter {
-  opacity: 0;
+@layer components {
+  /* Glassmorphism utilities */
+  .glass {
+    @apply bg-white/10 backdrop-blur-apple border border-white/20;
+  }
+
+  .glass-strong {
+    @apply bg-white/20 backdrop-blur-apple border border-white/30;
+  }
+
+  .liquid-glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Glow effects */
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(191, 90, 242, 0.6);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(10, 132, 255, 0.6);
+  }
 }
 
-.page-transition-enter-active {
-  opacity: 1;
-  transition: opacity 400ms ease;
+/* Page transitions */
+.page-transition {
+  transition: opacity 0.3s ease-in-out;
 }
 
-.page-transition-exit {
-  opacity: 1;
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transition: opacity 400ms ease;
-}
-
-/* Custom cursor styles */
-.custom-cursor {
-  @apply fixed pointer-events-none z-50 hidden md:block;
-  width: 40px;
-  height: 40px;
-  mix-blend-mode: difference;
-}
-
-/* Noise texture overlay */
-.noise-overlay {
-  @apply fixed inset-0 pointer-events-none opacity-[0.03] z-10;
-  background-image: url('/noise.png');
-  background-repeat: repeat;
+/* Prevent scrolling */
+#__next {
+  height: 100vh;
+  overflow: hidden;
 }
