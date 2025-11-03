@@ -13,7 +13,7 @@ export default function ProjectsPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16 text-center">
-          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-accent-purple to-accent-blue bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold mb-4 gradient-3d-text">
             Projects
           </h1>
           <p className="text-apple-label-secondary text-lg">

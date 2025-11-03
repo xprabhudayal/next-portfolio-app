@@ -11,7 +11,7 @@ export default function LinksPage() {
       <div className="max-w-2xl w-full">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold mb-4 gradient-3d-text">
             Connect
           </h1>
           <p className="text-apple-label-secondary text-lg">

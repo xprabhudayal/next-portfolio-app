@@ -28,7 +28,7 @@ export default function ResumePage() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">
+        <h1 className="text-6xl font-bold mb-6 gradient-3d-text">
           Resume
         </h1>
         <p className="text-apple-label-secondary text-lg mb-12 leading-relaxed">
