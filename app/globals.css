@@ -66,61 +66,263 @@
 }
 
 @layer components {
-  /* Glassmorphism utilities - Enhanced */
+  /* Enhanced Apple-style Liquid Glass Effects */
+  
+  /* Apple Liquid Glass Container - Multi-layer approach */
+  .apple-liquid-glass {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Layer 1: Distortion Filter (Bottom) */
+  .apple-liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    backdrop-filter: blur(0px);
+    filter: url(#apple-liquid-distortion);
+    isolation: isolate;
+  }
+
+  /* Layer 2: Glass Background */
+  .apple-liquid-glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Specular Highlight Layer */
+  .apple-liquid-glass .glass-highlight {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    overflow: hidden;
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 0 10px rgba(255, 255, 255, 0.6),
+      inset -1px -1px 0 rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+
+  /* Content Layer */
+  .apple-liquid-glass .glass-content {
+    position: relative;
+    z-index: 3;
+    padding: 1.5rem;
+  }
+
+  /* Enhanced Liquid Glass with True Refraction */
+  .liquid-glass {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    backdrop-filter: blur(25px) saturate(200%) brightness(1.1);
+    -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+
+  /* Liquid shine effect */
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  /* Dynamic liquid reflection */
+  .liquid-glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 70%
+    );
+    transform: skewX(-25deg);
+    transition: left 0.8s ease;
+    z-index: 1;
+  }
+
+  .liquid-glass:hover::after {
+    left: 100%;
+  }
+
+  /* Apple Vision Pro Style Glass */
+  .vision-glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2rem;
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 8px 16px rgba(0, 0, 0, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Enhanced specular highlights */
+  .vision-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.1) 40%,
+      transparent 70%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Refractive Glass with Distortion */
+  .refractive-glass {
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.5rem;
+    filter: url(#refractive-distortion);
+    box-shadow:
+      0 15px 35px rgba(0, 0, 0, 0.35),
+      0 5px 15px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.6),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Glass morphism utilities - Enhanced */
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(40px) saturate(200%) brightness(1.15);
+    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
 
-  .liquid-glass {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.03) 100%
-    );
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.1),
-      0 8px 32px rgba(0, 0, 0, 0.4);
-  }
-
-  /* 3D Text Gradient - Top to Bottom (White to Grey) */
+  /* 3D Text Gradient - Enhanced Apple style with repeating pattern */
   .gradient-3d-text {
     background: linear-gradient(
       to bottom,
-      #ffffff 0%,
-      #a0a0a0 100%
+      #ffffff 0%,        /* START - White */
+      #a8a8a8 20%,       /* STOP - Grey */
+      #ffffff 40%,       /* START (REPEAT) - White */
+      #8a8a8a 60%,       /* Middle grey */
+      #6e6e6e 80%,       /* STOP (REPEAT) - Darker grey */
+      #505050 100%       /* End - Dark grey */
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  /* Glow effects */
+  /* Enhanced glow effects */
   .glow-purple {
-    box-shadow: 0 0 40px rgba(191, 90, 242, 0.6);
+    box-shadow: 
+      0 0 20px rgba(191, 90, 242, 0.4),
+      0 0 40px rgba(191, 90, 242, 0.6),
+      0 0 80px rgba(191, 90, 242, 0.3);
   }
 
   .glow-blue {
-    box-shadow: 0 0 40px rgba(10, 132, 255, 0.6);
+    box-shadow: 
+      0 0 20px rgba(10, 132, 255, 0.4),
+      0 0 40px rgba(10, 132, 255, 0.6),
+      0 0 80px rgba(10, 132, 255, 0.3);
   }
 
   .glow-gradient {
     box-shadow:
-      0 0 60px rgba(191, 90, 242, 0.4),
-      0 0 80px rgba(10, 132, 255, 0.3);
+      0 0 30px rgba(191, 90, 242, 0.4),
+      0 0 60px rgba(10, 132, 255, 0.3),
+      0 0 90px rgba(191, 90, 242, 0.2);
+  }
+
+  /* Apple-style button glass */
+  .glass-button {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .glass-button:hover::after {
+    left: 100%;
   }
 }
 
@@ -134,3 +336,59 @@
   height: 100vh;
   overflow: hidden;
 }
+
+/* SVG Filters for Liquid Glass Effects - Add to your HTML */
+/*
+<svg style="display: none">
+  <!-- Apple Liquid Glass Distortion -->
+  <filter id="apple-liquid-distortion" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence
+      type="fractalNoise"
+      baseFrequency="0.008 0.008"
+      numOctaves="2"
+      seed="92"
+      result="noise"
+    />
+    <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="blurred"
+      scale="70"
+      xChannelSelector="R"
+      yChannelSelector="G"
+    />
+  </filter>
+
+  <!-- Refractive Glass Distortion -->
+  <filter id="refractive-distortion" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence
+      type="fractalNoise"
+      baseFrequency="0.01 0.01"
+      numOctaves="3"
+      seed="45"
+      result="turbulence"
+    />
+    <feGaussianBlur in="turbulence" stdDeviation="1.5" result="blur" />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="blur"
+      scale="50"
+      xChannelSelector="R"
+      yChannelSelector="G"
+    />
+    <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="finalBlur" />
+  </filter>
+
+  <!-- Specular Highlight Filter -->
+  <filter id="specular-highlight" x="0%" y="0%" width="100%" height="100%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+    <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" 
+                        specularExponent="20" lighting-color="white" result="specOut">
+      <feDistantLight azimuth="45" elevation="60"/>
+    </feSpecularLighting>
+    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2"/>
+    <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" 
+                 k1="0" k2="1" k3="1" k4="0"/>
+  </filter>
+</svg>
+*/

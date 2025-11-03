@@ -22,7 +22,7 @@ export default function Navbar({ currentPage }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50">
+    <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-[100]">
       <div className="liquid-glass rounded-apple-lg px-8 py-4 flex items-center gap-8 shadow-glass">
         {navItems.map((item) => (
           <Link
