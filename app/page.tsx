@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 const DraggableLanyard = dynamic(() => import('../components/DraggableLanyard'), {
   ssr: false,
   loading: () => (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-black">
+    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#2d1b4e] via-[#1e3a5f] via-[#2c5f7f] to-[#1a1f3a]">
       <div className="text-apple-label-secondary animate-pulse text-lg font-medium">
         Loading 3D Scene...
       </div>
@@ -16,7 +16,7 @@ const DraggableLanyard = dynamic(() => import('../components/DraggableLanyard'),
 
 export default function HomePage() {
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-black">
+    <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-[#2d1b4e] via-[#1e3a5f] via-[#2c5f7f] to-[#1a1f3a]">
       {/* 3D Lanyard - Behind navbar (z-0) */}
       <div className="absolute inset-0 z-0">
         <DraggableLanyard className="w-full h-full" />
