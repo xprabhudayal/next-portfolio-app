@@ -7,7 +7,7 @@ export default function LinksPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="w-full min-h-full overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16">
+    <div className="w-full min-h-full overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16 md:pt-32">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

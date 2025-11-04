@@ -23,7 +23,7 @@ export default function Navbar({ currentPage }: NavbarProps) {
 
   return (
     <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-[100]">
-      <div className="glass rounded-apple-lg px-6 py-3 flex items-center gap-6 shadow-glass">
+      <div className="glass rounded-apple px-6 py-3 flex items-center gap-6 shadow-glass">
         {navItems.map((item) => (
           <Link
             key={item.path}
@@ -38,9 +38,6 @@ export default function Navbar({ currentPage }: NavbarProps) {
             `}
           >
             {item.name}
-            {isActive(item.path) && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-blue to-accent-purple rounded-full" />
-            )}
           </Link>
         ))}
       </div>
