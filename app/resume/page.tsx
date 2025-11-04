@@ -18,7 +18,7 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="w-full min-h-full overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16 md:pt-32">
+    <div className="w-full min-h-full overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16 pt-32">
       <div className="text-center max-w-2xl mx-auto">
         {/* Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-3d-text gradient-text-blur page-title">
