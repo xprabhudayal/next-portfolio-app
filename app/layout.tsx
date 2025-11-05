@@ -1,12 +1,20 @@
 // app/layout.tsx
 'use client';
 
+// Import localStorage polyfill FIRST before any other imports
+import '../lib/localStorage-polyfill';
+
 import './globals.css';
 import Navbar from '../components/Navbar';
 import TalkAboutMeButton from '../components/TalkAboutMeButton';
-import LiveChatModal from '../components/LiveChatModal';
 import FlowingAurora from '../components/FlowingAurora';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import LiveChatModal with SSR disabled to prevent localStorage errors
+const LiveChatModal = dynamic(() => import('../components/LiveChatModal'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,

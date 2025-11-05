@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { LiveServerMessage, LiveSession, Blob } from '@google/genai';
+// No type imports from @google/genai - will use any to avoid module loading
 import { startLiveConversation } from '../services/geminiService';
 import { SYSTEM_INSTRUCTION } from './constants';
 import { XIcon, MicIcon, Volume2Icon } from './Icons';
@@ -15,7 +17,7 @@ function encode(bytes: Uint8Array): string {
   return btoa(binary);
 }
 
-function createBlob(data: Float32Array): Blob {
+function createBlob(data: Float32Array): any {
   const l = data.length;
   const int16 = new Int16Array(l);
   for (let i = 0; i < l; i++) {
@@ -62,8 +64,8 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
   const [status, setStatus] = useState('Initializing...');
   const [transcriptions, setTranscriptions] = useState<Transcription[]>([]);
 
-  const sessionRef = useRef<LiveSession | null>(null);
-  const messageQueueRef = useRef<AsyncQueue<LiveServerMessage>>(new AsyncQueue<LiveServerMessage>());
+  const sessionRef = useRef<any | null>(null);
+  const messageQueueRef = useRef<AsyncQueue<any>>(new AsyncQueue<any>());
   const inputAudioContextRef = useRef<AudioContext | null>(null);
   const outputAudioContextRef = useRef<AudioContext | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
@@ -291,7 +293,7 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
             source.connect(scriptProcessor);
             scriptProcessor.connect(inputAudioContext.destination);
           },
-          onmessage: (message: LiveServerMessage) => {
+          onmessage: (message: any) => {
             if (!mounted) return;
 
             // Add message to queue

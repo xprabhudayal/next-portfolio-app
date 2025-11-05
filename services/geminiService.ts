@@ -1,6 +1,15 @@
-import { GoogleGenAI, LiveSession, LiveServerMessage, Modality } from '@google/genai';
+'use client';
 
-export const getGeminiAI = () => {
+// No imports from @google/genai at all - types will be loaded dynamically
+export const getGeminiAI = async (): Promise<any> => {
+    // Ensure this only runs on the client side
+    if (typeof window === 'undefined') {
+        throw new Error("getGeminiAI can only be called on the client side");
+    }
+
+    // Dynamically import the SDK only when needed
+    const { GoogleGenAI } = await import('@google/genai/web');
+
     // Re-initializing GoogleGenAI ensures it picks up the latest API key
     // if the user has just selected one via a dialog.
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -13,13 +22,16 @@ export const getGeminiAI = () => {
 export const startLiveConversation = async (
     callbacks: {
         onopen?: () => void;
-        onmessage?: (message: LiveServerMessage) => void;
+        onmessage?: (message: any) => void;
         onerror?: (e: Event) => void;
         onclose?: (e: CloseEvent) => void;
     },
     systemInstruction: string
-): Promise<LiveSession> => {
-    const ai = getGeminiAI();
+): Promise<any> => {
+    // Dynamically import Modality
+    const { Modality } = await import('@google/genai/web');
+
+    const ai = await getGeminiAI();
 
     const sessionPromise = ai.live.connect({
         model: 'gemini-2.5-flash-native-audio-preview-09-2025',
