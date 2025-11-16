@@ -6,6 +6,7 @@ import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint, RapierRigidBody } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
+import { TouchDebouncer, triggerHaptic } from '@/utils/deviceDetection';
 
 // Extend THREE with MeshLine components
 extend({ MeshLineGeometry, MeshLineMaterial });
@@ -16,16 +17,91 @@ useTexture.preload('/band.jpg');
 
 interface DraggableLanyardProps {
   className?: string;
+  enableIntersectionOptimization?: boolean;
 }
 
 interface BandProps {
   maxSpeed?: number;
   minSpeed?: number;
+  isPaused?: boolean;
 }
 
-export default function DraggableLanyard({ className = '' }: DraggableLanyardProps) {
+export default function DraggableLanyard({
+  className = '',
+  enableIntersectionOptimization = true
+}: DraggableLanyardProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // IntersectionObserver for viewport-based optimization
+  useEffect(() => {
+    if (!enableIntersectionOptimization || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Pause physics when 75% out of viewport
+          setIsVisible(entry.intersectionRatio > 0.25);
+        });
+      },
+      {
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [enableIntersectionOptimization]);
+
+  // Detect reduced motion preference
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  // Fallback for reduced motion
+  if (prefersReducedMotion) {
+    return (
+      <div
+        ref={containerRef}
+        className={`${className}`}
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        role="img"
+        aria-label="Interactive 3D lanyard card (animation disabled)"
+      >
+        <div style={{
+          padding: '2rem',
+          textAlign: 'center',
+          opacity: 0.7
+        }}>
+          <p>3D animation disabled (respecting reduced motion preference)</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
+      ref={containerRef}
       className={`${className}`}
       style={{
         width: '100%',
@@ -33,6 +109,8 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
         position: 'relative',
         overflow: 'hidden'
       }}
+      role="application"
+      aria-label="Interactive 3D lanyard card - click and drag to interact"
     >
       <Canvas
         camera={{ position: [0, 0, 10], fov: 22 }}
@@ -49,16 +127,36 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
           width: '100%',
           height: '100%'
         }}
-        onCreated={() => {
+        onCreated={(state) => {
           console.log('✓ Canvas created successfully');
+
+          // Handle WebGL context loss
+          const canvas = state.gl.domElement;
+
+          const handleContextLost = (event: Event) => {
+            event.preventDefault();
+            console.warn('⚠ WebGL context lost - attempting recovery...');
+          };
+
+          const handleContextRestored = () => {
+            console.log('✓ WebGL context restored');
+          };
+
+          canvas.addEventListener('webglcontextlost', handleContextLost);
+          canvas.addEventListener('webglcontextrestored', handleContextRestored);
+
+          return () => {
+            canvas.removeEventListener('webglcontextlost', handleContextLost);
+            canvas.removeEventListener('webglcontextrestored', handleContextRestored);
+          };
         }}
       >
         <ambientLight intensity={Math.PI} />
 
         {/* CRITICAL: Physics MUST be wrapped in Suspense (per @react-three/rapier docs) */}
         <Suspense fallback={null}>
-          <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
-            <Band />
+          <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60} paused={!isVisible}>
+            <Band isPaused={!isVisible} />
           </Physics>
         </Suspense>
         <Environment background={false} blur={0.75}>
@@ -72,7 +170,7 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
   );
 }
 
-function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
+function Band({ maxSpeed = 50, minSpeed = 10, isPaused = false }: BandProps) {
   const band = useRef<any>(null);
   const fixed = useRef<RapierRigidBody>(null!);
   const j1 = useRef<RapierRigidBody>(null!);
@@ -84,6 +182,9 @@ function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
   const dir = new THREE.Vector3();
+
+  // Touch debouncer for optimized mobile interaction
+  const touchDebouncer = useRef(new TouchDebouncer(10, 16));
 
   const segmentProps = {
     type: 'dynamic' as const,
@@ -138,6 +239,9 @@ function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
   }, [hovered, dragged]);
 
   useFrame((state, delta) => {
+    // Skip updates when paused (out of viewport)
+    if (isPaused && !dragged) return;
+
     if (dragged) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
@@ -208,10 +312,22 @@ function Band({ maxSpeed = 50, minSpeed = 10 }: BandProps) {
             onPointerUp={(e: any) => {
               e.target.releasePointerCapture(e.pointerId);
               drag(false);
+              touchDebouncer.current.reset();
             }}
             onPointerDown={(e: any) => {
+              // Touch debouncing for mobile
+              const shouldProcess = touchDebouncer.current.shouldProcess(
+                e.clientX || 0,
+                e.clientY || 0
+              );
+
+              if (!shouldProcess && e.pointerType === 'touch') return;
+
               e.target.setPointerCapture(e.pointerId);
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+
+              // Optional: Haptic feedback on mobile
+              triggerHaptic(10);
             }}
           >
             <mesh geometry={nodes.card.geometry}>

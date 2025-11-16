@@ -1,0 +1,40 @@
+$ next dev --turbopack
+   ▲ Next.js 15.3.0 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://10.227.19.93:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Compiled instrumentation Node.js in 90ms
+ ✓ Compiled instrumentation Edge in 22ms
+ ✓ Ready in 1180ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.3s
+(node:13632) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ⨯ [TypeError: localStorage.getItem is not a function] {
+  digest: '3413256807'
+}
+[TypeError: localStorage.getItem is not a function]
+ ⨯ [TypeError: localStorage.getItem is not a function] { page: '/' }
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 625ms
+[TypeError: localStorage.getItem is not a function]
+[TypeError: localStorage.getItem is not a function]
+ ⨯ [TypeError: localStorage.getItem is not a function]
+ ⨯ [TypeError: localStorage.getItem is not a function]
+[TypeError: localStorage.getItem is not a function]
+ ⨯ unhandledRejection: [TypeError: localStorage.getItem is not a function]
+ ⨯ unhandledRejection:  [TypeError: localStorage.getItem is not a function]
+[TypeError: localStorage.getItem is not a function]
+[TypeError: localStorage.getItem is not a function]
+ ⨯ [TypeError: localStorage.getItem is not a function]
+[TypeError: localStorage.getItem is not a function] { page: '/' }
+[TypeError: localStorage.getItem is not a function]
+ ⨯ unhandledRejection: [TypeError: localStorage.getItem is not a function]
+ ⨯ unhandledRejection:  [TypeError: localStorage.getItem is not a function]
+ GET / 500 in 3895ms
+ GET / 500 in 37ms
+ ✓ Compiled /favicon.ico in 292ms
+ GET /favicon.ico 200 in 540ms
+[?25h
