@@ -44,6 +44,16 @@ module.exports = {
         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
         'glow': '0 0 20px rgba(191, 90, 242, 0.4)',
       },
+      keyframes: {
+        gradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
+      animation: {
+        gradient: 'gradient 8s linear infinite',
+      },
     },
   },
   plugins: [],
