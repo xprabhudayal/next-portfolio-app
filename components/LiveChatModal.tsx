@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-// No type imports from @google/genai - will use any to avoid module loading
-import { startLiveConversation } from '../services/geminiService';
 import { SYSTEM_INSTRUCTION } from './constants';
 import { XIcon, MicIcon, Volume2Icon } from './Icons';
 import { AsyncQueue } from '../utils/AsyncQueue';
@@ -268,6 +266,9 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
         inputAudioContextRef.current = inputAudioContext;
         outputAudioContextRef.current = outputAudioContext;
 
+        // Dynamically import geminiService to avoid SSR issues
+        const { startLiveConversation } = await import('../services/geminiService');
+        
         const session = await startLiveConversation({
           onopen: () => {
             if (!mounted || !inputAudioContextRef.current) {

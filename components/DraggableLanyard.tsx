@@ -35,7 +35,7 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 10], fov: 22 }}
+        camera={{ position: [-2, 0, 12], fov: 25 }}
         gl={{
           antialias: true,
           alpha: true,
