@@ -4,10 +4,13 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Navbar from './Navbar';
 import TalkAboutMeButton from './TalkAboutMeButton';
-import FlowingAurora from './FlowingAurora';
 
-// Dynamically import LiveChatModal with SSR disabled
+// Dynamically import components with SSR disabled for WebGL
 const LiveChatModal = dynamic(() => import('./LiveChatModal'), {
+  ssr: false,
+});
+
+const Aurora = dynamic(() => import('./reactbits/Aurora'), {
   ssr: false,
 });
 
@@ -87,9 +90,16 @@ export default function ClientLayout({
         </filter>
       </svg>
 
-      {/* Flowing Aurora Background - Present on all pages */}
+      {/* Aurora Background - Apple-style gradient animation */}
       <div className="fixed inset-0 z-0">
-        <FlowingAurora />
+        <Aurora 
+          colorStops={['#0a84ff', '#bf5af2', '#ff375f']} 
+          amplitude={1.2} 
+          blend={0.6}
+          speed={0.8}
+        />
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       </div>
 
       {/* Main content wrapper */}

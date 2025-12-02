@@ -6,6 +6,11 @@ import Link from 'next/link';
 import BlurText from '../components/BlurText';
 import GradientText from '../components/GradientText';
 import ScrollIndicator from '../components/ScrollIndicator';
+import CountUp from '../components/reactbits/CountUp';
+import RotatingText from '../components/reactbits/RotatingText';
+import StarBorder from '../components/reactbits/StarBorder';
+import ShinyText from '../components/reactbits/ShinyText';
+import Magnet from '../components/reactbits/Magnet';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 // CRITICAL FIX: Disable SSR for 3D components (Next.js 15 + WebGL incompatibility)
@@ -29,17 +34,19 @@ export default function HomePage() {
         <div className="flex-1 flex flex-col justify-between px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-28 pb-12 select-none">
           {/* Main Hero Section */}
           <div className="flex-1 flex flex-col justify-center max-w-2xl">
-            {/* Status Badge */}
+            {/* Status Badge with Star Border */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-8"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-apple-label-secondary">
-                <Sparkles className="w-4 h-4 text-accent-purple" />
-                <span>Available for opportunities</span>
-              </span>
+              <StarBorder color="#bf5af2" speed="4s">
+                <span className="inline-flex items-center gap-2 text-sm text-white/90">
+                  <Sparkles className="w-4 h-4 text-accent-purple" />
+                  <ShinyText text="Available for opportunities" speed={3} className="text-white/90" />
+                </span>
+              </StarBorder>
             </motion.div>
 
             {/* Name - Editorial Typography */}
@@ -63,46 +70,59 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Role/Title */}
+            {/* Role/Title with Rotating Text */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
               className="mb-8"
             >
-              <p className="text-xl sm:text-2xl md:text-3xl text-apple-label-secondary font-light tracking-wide">
-                AI Engineer & Full-Stack Developer
-              </p>
-              <p className="text-base sm:text-lg text-apple-label-tertiary mt-2 max-w-xl">
+              <div className="text-xl sm:text-2xl md:text-3xl text-apple-label-secondary font-light tracking-wide flex items-center gap-2 flex-wrap">
+                <RotatingText
+                  texts={['AI Engineer', 'Full-Stack Developer', 'ML Researcher', 'Problem Solver']}
+                  mainClassName="text-white font-medium overflow-hidden h-[1.2em]"
+                  staggerFrom="last"
+                  staggerDuration={0.025}
+                  rotationInterval={3000}
+                  transition={{ type: 'spring', damping: 30, stiffness: 200 }}
+                />
+                <span className="text-apple-label-tertiary">&</span>
+                <span>Builder</span>
+              </div>
+              <p className="text-base sm:text-lg text-apple-label-tertiary mt-3 max-w-xl leading-relaxed">
                 Building intelligent systems with LangGraph, PyTorch, and Next.js. 
                 Currently researching emotion detection at ESIEA Paris.
               </p>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons with Magnet Effect */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.6 }}
               className="flex flex-wrap gap-4"
             >
-              <Link
-                href="/projects"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full liquid-glass shadow-glass transition-all duration-300 hover:scale-[1.02] hover:shadow-glow"
-              >
-                <span className="font-medium text-white">View Projects</span>
-                <ArrowRight className="w-5 h-5 text-accent-purple transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/resume"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-apple-separator transition-all duration-300 hover:bg-white/5 hover:border-apple-label-tertiary"
-              >
-                <span className="font-medium text-apple-label-secondary">Download Resume</span>
-              </Link>
+              <Magnet padding={60} magnetStrength={3}>
+                <Link
+                  href="/projects"
+                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-medium shadow-lg transition-all duration-300 hover:shadow-glow hover:shadow-accent-purple/30"
+                >
+                  <span>View Projects</span>
+                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </Magnet>
+              <Magnet padding={60} magnetStrength={3}>
+                <Link
+                  href="/resume"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30"
+                >
+                  <span className="font-medium text-white/90">Download Resume</span>
+                </Link>
+              </Magnet>
             </motion.div>
           </div>
 
-          {/* Bottom Section - Stats */}
+          {/* Bottom Section - Stats with CountUp */}
           <div className="flex items-end justify-between">
             <motion.div
               initial={{ opacity: 0 }}
@@ -110,17 +130,26 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 2 }}
               className="hidden md:flex gap-12"
             >
-              <div>
-                <p className="text-3xl font-bold text-white">7+</p>
-                <p className="text-sm text-apple-label-tertiary">Projects Built</p>
+              <div className="group">
+                <p className="text-3xl lg:text-4xl font-bold text-white tabular-nums">
+                  <CountUp to={7} duration={2.5} delay={2} className="text-white" />
+                  <span className="text-accent-purple">+</span>
+                </p>
+                <p className="text-sm text-apple-label-tertiary mt-1 group-hover:text-apple-label-secondary transition-colors">Projects Built</p>
               </div>
-              <div>
-                <p className="text-3xl font-bold text-white">1st</p>
-                <p className="text-sm text-apple-label-tertiary">IIM Hackathon</p>
+              <div className="group">
+                <p className="text-3xl lg:text-4xl font-bold text-white tabular-nums">
+                  <CountUp to={1} duration={1.5} delay={2.2} className="text-white" />
+                  <span className="text-accent-blue">st</span>
+                </p>
+                <p className="text-sm text-apple-label-tertiary mt-1 group-hover:text-apple-label-secondary transition-colors">IIM Hackathon</p>
               </div>
-              <div>
-                <p className="text-3xl font-bold text-white">88%</p>
-                <p className="text-sm text-apple-label-tertiary">RAG Accuracy</p>
+              <div className="group">
+                <p className="text-3xl lg:text-4xl font-bold text-white tabular-nums">
+                  <CountUp to={88} duration={2} delay={2.4} className="text-white" />
+                  <span className="text-accent-pink">%</span>
+                </p>
+                <p className="text-sm text-apple-label-tertiary mt-1 group-hover:text-apple-label-secondary transition-colors">RAG Accuracy</p>
               </div>
             </motion.div>
             <ScrollIndicator className="hidden lg:hidden md:flex" />
