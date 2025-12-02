@@ -31,7 +31,7 @@ export default function HomePage() {
       {/* Hero Content */}
       <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 sm:px-8 md:px-12 lg:px-20 pt-28 pb-12 pointer-events-none">
         {/* Main Hero Section */}
-        <div className="flex-1 flex flex-col justify-center max-w-4xl pointer-events-auto">
+        <div className="flex-1 flex flex-col justify-center max-w-4xl pointer-events-auto select-none">
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -106,7 +106,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex items-end justify-between pointer-events-auto">
+        <div className="flex items-end justify-between pointer-events-auto select-none">
           {/* Quick Stats */}
           <motion.div
             initial={{ opacity: 0 }}
