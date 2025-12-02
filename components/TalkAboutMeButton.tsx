@@ -1,23 +1,25 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { PhoneIcon } from './Icons';
 import { TalkButtonProps } from '../types';
 
 export default function TalkAboutMeButton({ onClick }: TalkButtonProps) {
   return (
-    <button
+    <motion.button
       onClick={onClick}
-      className="fixed bottom-8 right-8 z-50 group"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 2 }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      className="fixed bottom-6 right-6 z-50 group"
       aria-label="Talk about me with AI"
     >
-      {/* Glow effect - only on hover */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-accent-purple to-accent-blue opacity-0 group-hover:opacity-75 blur-2xl transition-opacity duration-500 animate-pulse"></div>
-
-      {/* Button */}
-      <div className="relative flex items-center gap-3 px-8 py-4 rounded-full liquid-glass shadow-glass transition-all duration-300 group-hover:scale-105 group-hover:glow-gradient">
-        <PhoneIcon className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
-        <span className="font-medium text-apple-label">Talk about Me</span>
+      <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] transition-all duration-300 group-hover:bg-white/[0.06] group-hover:border-white/[0.1]">
+        <PhoneIcon className="w-4 h-4 text-white/50 group-hover:text-white/80 transition-colors" />
+        <span className="text-sm font-medium text-white/60 group-hover:text-white/90 transition-colors">Talk about Me</span>
       </div>
-    </button>
+    </motion.button>
   );
 }

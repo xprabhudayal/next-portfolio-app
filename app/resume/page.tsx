@@ -1,14 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Download } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Download, FileText } from 'lucide-react';
 
 export default function ResumePage() {
-  const router = useRouter();
-
   const handleDownload = () => {
-    // Create a temporary link to download the PDF
     const link = document.createElement('a');
     link.href = '/docs/updated_2page_resume.pdf';
     link.download = 'Prabhudayal_Vaishnav_Resume.pdf';
@@ -18,26 +14,65 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="w-full min-h-full overflow-y-auto py-20 px-4 sm:px-6 md:px-8 lg:px-16 pt-32">
-      <div className="text-center max-w-2xl mx-auto">
-        {/* Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-3d-text gradient-text-blur page-title">
-          Resume
-        </h1>
-        <p className="page-description mb-8 px-4">
-          Download my resume to learn more about my experience, skills, and achievements
-        </p>
+    <div className="w-full min-h-screen bg-black flex items-center justify-center py-20 px-4 pt-32">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-violet-600/10 via-fuchsia-600/10 to-pink-600/10 rounded-full blur-[150px]" />
+      </div>
 
-        {/* Download Button */}
-        <button
-          onClick={handleDownload}
-          className="group liquid-glass rounded-apple px-8 sm:px-10 py-4 sm:py-5 inline-flex items-center gap-3 sm:gap-4 shadow-glass transition-all duration-300 hover:scale-[1.02] hover:shadow-glow mb-8"
+      <div className="relative z-10 text-center max-w-md mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mb-8 inline-flex"
         >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-strong flex items-center justify-center transition-all duration-300 group-hover:bg-accent-blue/10">
-            <Download className="w-5 h-5 sm:w-6 sm:h-6 text-accent-blue group-hover:animate-bounce" />
+          <div className="w-20 h-20 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center">
+            <FileText className="w-8 h-8 text-white/50" />
           </div>
-          <span className="text-lg sm:text-xl font-semibold platform-name">Download Resume</span>
-        </button>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-5xl sm:text-6xl font-bold mb-4 text-white"
+        >
+          Resume
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-lg text-white/40 mb-10"
+        >
+          Download my resume to learn more about my experience and skills
+        </motion.p>
+
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          onClick={handleDownload}
+          className="group px-8 py-4 rounded-full bg-white text-black font-semibold inline-flex items-center gap-3 transition-all duration-300 hover:shadow-[0_0_40px_rgba(168,85,247,0.3)]"
+        >
+          <Download className="w-5 h-5" />
+          Download Resume
+        </motion.button>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-12 flex items-center justify-center gap-6 text-sm text-white/30"
+        >
+          <span>2 Pages</span>
+          <span className="w-1 h-1 rounded-full bg-white/20" />
+          <span>PDF Format</span>
+          <span className="w-1 h-1 rounded-full bg-white/20" />
+          <span>Updated Dec 2025</span>
+        </motion.div>
       </div>
     </div>
   );

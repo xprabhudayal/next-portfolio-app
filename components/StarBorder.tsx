@@ -11,24 +11,24 @@ type StarBorderProps<T extends React.ElementType> = React.ComponentPropsWithoutR
   thickness?: number;
 };
 
-const StarBorder = <T extends React.ElementType = 'div'>({
+const StarBorder = <T extends React.ElementType = 'button'>({
   as,
   className = '',
-  color = '#bf5af2',
+  color = 'white',
   speed = '6s',
   thickness = 1,
   children,
   ...rest
 }: StarBorderProps<T>) => {
-  const Component = as || 'div';
+  const Component = as || 'button';
 
   return (
     <Component
-      className={`relative inline-block overflow-hidden rounded-full ${className}`}
-      {...(rest as React.ComponentPropsWithoutRef<T>)}
+      className={`relative inline-block overflow-hidden rounded-[20px] ${className}`}
+      {...(rest as any)}
       style={{
         padding: `${thickness}px 0`,
-        ...(rest as React.ComponentPropsWithoutRef<T>).style
+        ...(rest as any).style
       }}
     >
       <div
@@ -45,7 +45,7 @@ const StarBorder = <T extends React.ElementType = 'div'>({
           animationDuration: speed
         }}
       />
-      <div className="relative z-10 bg-black/40 backdrop-blur-sm border border-white/10 text-white text-center text-sm py-2 px-4 rounded-full">
+      <div className="relative z-1 bg-gradient-to-b from-black/80 to-black/95 border border-white/10 text-white text-center py-4 px-7 rounded-[20px]">
         {children}
       </div>
     </Component>

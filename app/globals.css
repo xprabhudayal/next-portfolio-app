@@ -29,482 +29,73 @@
 
 @layer base {
   :root {
-    --color-background: #000000;
-    --color-text: #FFFFFF;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 2%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 2%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 263 70% 50%;
+    --radius: 0.75rem;
+  }
 
-    /* Enhanced Text Color Hierarchy - WCAG Compliant */
-    --color-text-primary: #FFFFFF;           /* Pure white for titles - 21:1 */
-    --color-text-secondary: #E5E5E5;        /* Light gray for subtitles - 16:1 */
-    --color-text-body: #B8B8B8;             /* Medium gray for body text - 7.2:1 */
-    --color-text-muted: #9A9A9A;            /* Muted for secondary info - 5.5:1 */
-    --color-text-disabled: #6B6B6B;         /* Subtle for URLs/metadata - 4.6:1 */
+  * {
+    @apply border-border;
   }
 
   html {
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-    @apply scroll-smooth;
-    background: #000000;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply text-apple-label font-sf-pro antialiased;
+    @apply bg-black text-white antialiased;
     min-height: 100vh;
-    width: 100vw;
-    background: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sf-pro font-medium tracking-tight;
-    color: var(--color-text-primary);
-  }
-
-  h1 {
-    @apply text-5xl md:text-6xl lg:text-7xl;
-  }
-
-  h2 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h3 {
-    @apply text-3xl md:text-4xl;
-  }
-
-  p {
-    @apply font-normal leading-relaxed;
-    color: var(--color-text-body);
+  ::selection {
+    background: rgba(168, 85, 247, 0.4);
+    color: white;
   }
 }
 
 @layer components {
-  /* Enhanced Apple-style Liquid Glass Effects */
-  
-  /* Apple Liquid Glass Container - Multi-layer approach */
-  .apple-liquid-glass {
-    position: relative;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  /* Layer 1: Distortion Filter (Bottom) */
-  .apple-liquid-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    backdrop-filter: blur(0px);
-    filter: url(#apple-liquid-distortion);
-    isolation: isolate;
-  }
-
-  /* Layer 2: Glass Background */
-  .apple-liquid-glass::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-  }
-
-  /* Specular Highlight Layer */
-  .apple-liquid-glass .glass-highlight {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    overflow: hidden;
-    box-shadow: 
-      inset 1px 1px 0 rgba(255, 255, 255, 0.8),
-      inset 0 0 10px rgba(255, 255, 255, 0.6),
-      inset -1px -1px 0 rgba(255, 255, 255, 0.2);
-    pointer-events: none;
-  }
-
-  /* Content Layer */
-  .apple-liquid-glass .glass-content {
-    position: relative;
-    z-index: 3;
-    padding: 1.5rem;
-  }
-
-  /* Enhanced Liquid Glass with True Refraction */
-  .liquid-glass {
-    position: relative;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.10) 50%,
-      rgba(255, 255, 255, 0.14) 100%
-    );
-    backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
-    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 1.5rem;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.15);
-    overflow: hidden;
-  }
-
-  /* Liquid shine effect */
-  .liquid-glass::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.8) 50%,
-      transparent 100%
-    );
-    z-index: 1;
-  }
-
-  /* Dynamic liquid reflection */
-  .liquid-glass::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.3) 50%,
-      transparent 70%
-    );
-    transform: skewX(-25deg);
-    transition: left 0.8s ease;
-    z-index: 1;
-  }
-
-  .liquid-glass:hover::after {
-    left: 100%;
-  }
-
-  /* Apple Vision Pro Style Glass */
-  .vision-glass {
-    background: rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(50px) saturate(200%) brightness(1.25);
-    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.25);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 2rem;
-    box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.5),
-      0 8px 16px rgba(0, 0, 0, 0.3),
-      inset 0 2px 4px rgba(255, 255, 255, 0.4),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Enhanced specular highlights */
-  .vision-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 30% 20%,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0.1) 40%,
-      transparent 70%
-    );
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Refractive Glass with Distortion */
-  .refractive-glass {
-    position: relative;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(30px) saturate(200%);
-    -webkit-backdrop-filter: blur(30px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1.5rem;
-    filter: url(#refractive-distortion);
-    box-shadow:
-      0 15px 35px rgba(0, 0, 0, 0.35),
-      0 5px 15px rgba(0, 0, 0, 0.25),
-      inset 0 1px 1px rgba(255, 255, 255, 0.6),
-      inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Glass morphism utilities - Enhanced with Depth System */
-  /* Level 1: Navigation - Subtle but visible */
   .glass {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(50px) saturate(200%) brightness(1.3);
-    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.3);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-
-  /* Level 2: Cards - Medium with good visibility */
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
-    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.3);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow:
-      0 12px 40px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-
-  /* Level 3: Modals/Overlays - Strong and prominent */
-  .glass-modal {
-    background: rgba(255, 255, 255, 0.20);
-    backdrop-filter: blur(50px) saturate(200%) brightness(1.4);
-    -webkit-backdrop-filter: blur(50px) saturate(200%) brightness(1.4);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 16px 48px rgba(0, 0, 0, 0.6),
-      inset 0 2px 0 rgba(255, 255, 255, 0.35);
-  }
-
-  /* Enhanced 3D Text Gradient with Better Contrast */
-  .gradient-3d-text {
-    background: linear-gradient(
-      to bottom,
-      #ffffff 0%,
-      #f0f0f0 25%,
-      #e0e0e0 50%,
-      #d0d0d0 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.5),
-      0 2px 4px rgba(0, 0, 0, 0.3);
-    font-weight: 600;
-  }
-
-  /* Text Hierarchy Utilities */
-  .text-secondary {
-    color: var(--color-text-secondary);
-  }
-
-  .text-muted {
-    color: var(--color-text-muted);
-  }
-
-  .text-subtle {
-    color: var(--color-text-disabled);
-  }
-
-  /* Card Text Hierarchy */
-  .card-title {
-    color: var(--color-text-primary);
-    font-weight: 500;
-    font-size: 1.125rem;
-  }
-
-  .card-subtitle {
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-  }
-
-  .card-description {
-    color: var(--color-text-body);
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-top: 0.5rem;
-  }
-
-  /* Page Title Styling */
-  .page-title {
-    color: var(--color-text-primary);
-    font-weight: 600;
-    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-  }
-
-  /* Page Description */
-  .page-description {
-    color: var(--color-text-body);
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-
-  /* Platform Name */
-  .platform-name {
-    color: var(--color-text-primary);
-    font-weight: 500;
-  }
-
-  /* Platform URL - Improved Accessibility */
-  .platform-url {
-    color: var(--color-text-disabled);
-    font-size: 0.9rem;
-    opacity: 1;
-  }
-
-  .link-card:hover .platform-url {
-    color: var(--color-text-muted);
-    opacity: 1;
-  }
-
-  /* Feature Text */
-  .feature-text {
-    color: var(--color-text-secondary);
-    font-weight: 400;
-  }
-
-  /* Subtle blur effect for content below gradient text */
-  .gradient-text-blur {
-    position: relative;
-  }
-
-  .gradient-text-blur::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    right: 0;
-    height: 40px;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Enhanced glow effects */
-  .glow-purple {
-    box-shadow: 
-      0 0 20px rgba(191, 90, 242, 0.4),
-      0 0 40px rgba(191, 90, 242, 0.6),
-      0 0 80px rgba(191, 90, 242, 0.3);
-  }
-
-  .glow-blue {
-    box-shadow: 
-      0 0 20px rgba(10, 132, 255, 0.4),
-      0 0 40px rgba(10, 132, 255, 0.6),
-      0 0 80px rgba(10, 132, 255, 0.3);
-  }
-
-  .glow-gradient {
-    box-shadow:
-      0 0 30px rgba(191, 90, 242, 0.4),
-      0 0 60px rgba(10, 132, 255, 0.3),
-      0 0 90px rgba(191, 90, 242, 0.2);
-  }
-
-  /* Apple-style button glass */
-  .glass-button {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(30px) saturate(180%) brightness(1.2);
-    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .glass-button:hover {
-    background: rgba(255, 255, 255, 0.22);
-    border-color: rgba(255, 255, 255, 0.35);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  }
-
-  .glass-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-
-  .glass-button:hover::after {
-    left: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
 
-/* Page transitions */
-.page-transition {
-  transition: opacity 0.3s ease-in-out;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Allow scrolling in Next.js container */
-#__next {
-  min-height: 100vh;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* SVG Filters for Liquid Glass Effects - Add to your HTML */
-/*
-<svg style="display: none">
-  <!-- Apple Liquid Glass Distortion -->
-  <filter id="apple-liquid-distortion" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence
-      type="fractalNoise"
-      baseFrequency="0.008 0.008"
-      numOctaves="2"
-      seed="92"
-      result="noise"
-    />
-    <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
-    <feDisplacementMap
-      in="SourceGraphic"
-      in2="blurred"
-      scale="70"
-      xChannelSelector="R"
-      yChannelSelector="G"
-    />
-  </filter>
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
 
-  <!-- Refractive Glass Distortion -->
-  <filter id="refractive-distortion" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence
-      type="fractalNoise"
-      baseFrequency="0.01 0.01"
-      numOctaves="3"
-      seed="45"
-      result="turbulence"
-    />
-    <feGaussianBlur in="turbulence" stdDeviation="1.5" result="blur" />
-    <feDisplacementMap
-      in="SourceGraphic"
-      in2="blur"
-      scale="50"
-      xChannelSelector="R"
-      yChannelSelector="G"
-    />
-    <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="finalBlur" />
-  </filter>
-
-  <!-- Specular Highlight Filter -->
-  <filter id="specular-highlight" x="0%" y="0%" width="100%" height="100%">
-    <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
-    <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" 
-                        specularExponent="20" lighting-color="white" result="specOut">
-      <feDistantLight azimuth="45" elevation="60"/>
-    </feSpecularLighting>
-    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2"/>
-    <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" 
-                 k1="0" k2="1" k3="1" k4="0"/>
-  </filter>
-</svg>
-*/
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

@@ -350,12 +350,20 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
   }, [cleanup, processTurn]);
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center animate-fade-in">
-      <div className="bg-gray-900/50 border border-white/10 rounded-2xl w-full max-w-2xl h-[80vh] flex flex-col p-6 shadow-2xl">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Live Conversation</h2>
-          <button onClick={onClose} className="p-2 rounded-full hover:bg-white/10 transition-colors">
-            <XIcon className="w-6 h-6" />
+    <div className="fixed inset-0 bg-[#030014]/90 backdrop-blur-2xl z-50 flex items-center justify-center">
+      {/* Background glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-sky-500/10 via-indigo-500/10 to-violet-500/10 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="relative bg-white/[0.02] border border-white/[0.08] rounded-3xl w-full max-w-2xl h-[80vh] flex flex-col p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/[0.05]">
+          <div>
+            <h2 className="text-xl font-semibold text-white">Live Conversation</h2>
+            <p className="text-sm text-white/40 mt-1">AI-powered voice chat</p>
+          </div>
+          <button onClick={onClose} className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+            <XIcon className="w-5 h-5 text-white/70" />
           </button>
         </div>
 
@@ -363,28 +371,30 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
           {transcriptions.map((t, i) => (
             <div key={i} className={`flex items-start gap-3 ${t.speaker === 'user' ? 'justify-end' : ''}`}>
               {t.speaker === 'model' && (
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center">
-                  <Volume2Icon className="w-5 h-5" />
+                <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-white/10 flex items-center justify-center">
+                  <Volume2Icon className="w-4 h-4 text-indigo-400" />
                 </div>
               )}
               <div
-                className={`px-4 py-2 rounded-xl max-w-md ${
-                  t.speaker === 'user' ? 'bg-blue-600' : 'bg-gray-700'
-                } ${t.isFinal ? '' : 'opacity-70'}`}
+                className={`px-4 py-3 rounded-2xl max-w-md text-sm ${
+                  t.speaker === 'user' 
+                    ? 'bg-gradient-to-r from-sky-500/20 to-indigo-500/20 border border-sky-500/20 text-white' 
+                    : 'bg-white/5 border border-white/10 text-white/80'
+                } ${t.isFinal ? '' : 'opacity-60'}`}
               >
                 {t.text}
               </div>
               {t.speaker === 'user' && (
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
-                  <MicIcon className="w-5 h-5" />
+                <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500/20 to-indigo-500/20 border border-white/10 flex items-center justify-center">
+                  <MicIcon className="w-4 h-4 text-sky-400" />
                 </div>
               )}
             </div>
           ))}
         </div>
 
-        <div className="pt-4 text-center text-gray-400 border-t border-white/10">
-          <p>{status}</p>
+        <div className="pt-4 mt-4 text-center border-t border-white/[0.05]">
+          <p className="text-sm text-white/40">{status}</p>
         </div>
       </div>
     </div>

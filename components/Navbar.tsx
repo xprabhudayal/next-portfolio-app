@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { NavbarProps } from '../types';
+import { motion } from 'framer-motion';
 
-export default function Navbar({ currentPage }: NavbarProps) {
+export default function Navbar() {
   const pathname = usePathname();
 
   const navItems = [
@@ -15,32 +15,43 @@ export default function Navbar({ currentPage }: NavbarProps) {
   ];
 
   const isActive = (path: string) => {
-    if (path === '/') {
-      return pathname === '/';
-    }
+    if (path === '/') return pathname === '/';
     return pathname?.startsWith(path);
   };
 
   return (
-    <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-[100]">
-      <div className="glass rounded-apple px-6 py-3 flex items-center gap-6 shadow-glass">
-        {navItems.map((item) => (
-          <Link
-            key={item.path}
-            href={item.path}
-            className={`
-              relative text-sm font-medium tracking-wide transition-all duration-300
-              ${
-                isActive(item.path)
-                  ? 'text-apple-label'
-                  : 'text-apple-label-secondary hover:text-apple-label'
-              }
-            `}
-          >
-            {item.name}
-          </Link>
-        ))}
+    <motion.nav 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-[100]"
+    >
+      <div className="px-1.5 py-1.5 rounded-full bg-white/[0.02] backdrop-blur-2xl border border-white/[0.06]">
+        <div className="flex items-center gap-0.5">
+          {navItems.map((item) => (
+            <Link key={item.path} href={item.path}>
+              <motion.div
+                className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  isActive(item.path)
+                    ? 'text-white'
+                    : 'text-white/40 hover:text-white/70'
+                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isActive(item.path) && (
+                  <motion.div
+                    layoutId="nav-active"
+                    className="absolute inset-0 bg-white/[0.08] rounded-full"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
+                  />
+                )}
+                <span className="relative z-10">{item.name}</span>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

@@ -70,18 +70,18 @@ struct ColorStop {
   float position;
 };
 
-#define COLOR_RAMP(colors, factor, finalColor) {              \\
-  int index = 0;                                            \\
-  for (int i = 0; i < 2; i++) {                               \\
-     ColorStop currentColor = colors[i];                    \\
-     bool isInBetween = currentColor.position <= factor;    \\
-     index = int(mix(float(index), float(i), float(isInBetween))); \\
-  }                                                         \\
-  ColorStop currentColor = colors[index];                   \\
-  ColorStop nextColor = colors[index + 1];                  \\
-  float range = nextColor.position - currentColor.position; \\
-  float lerpFactor = (factor - currentColor.position) / range; \\
-  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \\
+#define COLOR_RAMP(colors, factor, finalColor) {              \
+  int index = 0;                                            \
+  for (int i = 0; i < 2; i++) {                               \
+     ColorStop currentColor = colors[i];                    \
+     bool isInBetween = currentColor.position <= factor;    \
+     index = int(mix(float(index), float(i), float(isInBetween))); \
+  }                                                         \
+  ColorStop currentColor = colors[index];                   \
+  ColorStop nextColor = colors[index + 1];                  \
+  float range = nextColor.position - currentColor.position; \
+  float lerpFactor = (factor - currentColor.position) / range; \
+  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
 }
 
 void main() {
@@ -115,10 +115,11 @@ interface AuroraProps {
   blend?: number;
   time?: number;
   speed?: number;
+  className?: string;
 }
 
 export default function Aurora(props: AuroraProps) {
-  const { colorStops = ['#0a84ff', '#bf5af2', '#ff375f'], amplitude = 1.0, blend = 0.5 } = props;
+  const { colorStops = ['#0ea5e9', '#6366f1', '#8b5cf6'], amplitude = 1.0, blend = 0.5, className = '' } = props;
   const propsRef = useRef<AuroraProps>(props);
   propsRef.current = props;
 
@@ -207,5 +208,5 @@ export default function Aurora(props: AuroraProps) {
     };
   }, [amplitude, blend, colorStops]);
 
-  return <div ref={ctnDom} className="w-full h-full" />;
+  return <div ref={ctnDom} className={`w-full h-full ${className}`} />;
 }

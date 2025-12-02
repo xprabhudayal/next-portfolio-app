@@ -31,11 +31,11 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
         width: '100%',
         height: '100%',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'visible'
       }}
     >
       <Canvas
-        camera={{ position: [-2, 0, 12], fov: 25 }}
+        camera={{ position: [-2, 0, 14], fov: 30 }}
         gl={{
           antialias: true,
           alpha: true,
@@ -44,10 +44,10 @@ export default function DraggableLanyard({ className = '' }: DraggableLanyardPro
         style={{
           background: 'transparent',
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%'
+          top: '-10%',
+          left: '-15%',
+          width: '130%',
+          height: '120%'
         }}
         onCreated={() => {
           console.log('✓ Canvas created successfully');

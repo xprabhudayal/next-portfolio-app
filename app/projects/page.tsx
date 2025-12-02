@@ -2,99 +2,100 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { RESUME_DATA } from '../../components/constants';
-import { ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function ProjectsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="w-full h-full overflow-y-auto pt-32 pb-16 sm:pb-20 px-4 sm:px-6 md:px-8 lg:px-16">
-      <div className="max-w-7xl mx-auto">
+    <div className="w-full min-h-screen bg-black pt-32 pb-20 px-4 sm:px-6 md:px-8 lg:px-16">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/10 rounded-full blur-[150px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-12 sm:mb-16 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-3d-text gradient-text-blur page-title">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white">
             Projects
           </h1>
-          <p className="page-description px-4">
+          <p className="text-lg text-white/40 max-w-xl mx-auto">
             A collection of my work in AI, full-stack development, and open source
           </p>
-        </div>
+        </motion.div>
 
-        {/* Asymmetric Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {RESUME_DATA.projects.map((project, index) => {
-            // Create asymmetric layout
             const isLarge = index % 5 === 0 || index % 5 === 3;
             const colSpan = isLarge ? 'md:col-span-2' : 'md:col-span-1';
 
             return (
-              <a
+              <motion.a
                 key={project.title}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative ${colSpan} glass rounded-apple-lg overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-glow`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={`group relative ${colSpan} rounded-2xl overflow-hidden bg-white/[0.02] border border-white/[0.04] transition-all duration-500 hover:bg-white/[0.04] hover:border-white/[0.08]`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Image */}
                 {project.image && (
-                  <div className="relative w-full h-48 sm:h-56 md:h-64 bg-apple-gray-200">
+                  <div className="relative w-full h-48 sm:h-56 overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-apple-black via-apple-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                   </div>
                 )}
 
-                {/* Content */}
-                <div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
-                  {/* Title with External Link */}
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="card-title text-xl sm:text-2xl group-hover:text-accent-purple transition-colors duration-300">
+                <div className="p-5 space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-xl font-semibold text-white group-hover:text-violet-300 transition-colors">
                       {project.title}
                     </h3>
-                    <ExternalLink
-                      className={`w-4 h-4 sm:w-5 sm:h-5 text-subtle group-hover:text-accent-blue transition-all duration-300 flex-shrink-0 ${
-                        hoveredIndex === index ? 'translate-x-1 -translate-y-1' : ''
-                      }`}
-                    />
+                    <ArrowUpRight className={`w-5 h-5 text-white/20 group-hover:text-white/60 transition-all ${hoveredIndex === index ? 'translate-x-0.5 -translate-y-0.5' : ''}`} />
                   </div>
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 sm:px-3 py-1 text-xs font-medium rounded-full glass text-muted"
-                      >
+                      <span key={tech} className="px-2.5 py-1 text-xs rounded-full bg-white/[0.04] border border-white/[0.06] text-white/50">
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Description */}
-                  <p className="card-description text-sm">
+                  <p className="text-sm text-white/30 leading-relaxed">
                     {project.description}
                   </p>
 
-                  {/* Key Points */}
                   {project.points.length > 0 && (
-                    <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-muted">
+                    <ul className="space-y-1.5 text-sm text-white/40">
                       {project.points.slice(0, isLarge ? 3 : 2).map((point, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="text-accent-purple mt-1 flex-shrink-0">•</span>
+                          <span className="text-violet-400 mt-0.5">•</span>
                           <span>{point}</span>
                         </li>
                       ))}
                     </ul>
                   )}
                 </div>
-              </a>
+              </motion.a>
             );
           })}
         </div>
