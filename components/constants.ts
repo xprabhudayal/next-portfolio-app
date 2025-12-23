@@ -10,7 +10,7 @@ export const RESUME_DATA: ResumeData = {
       { name: "GitHub", url: "https://github.com/xprabhudayal", icon: Github },
       { name: "LinkedIn", url: "https://www.linkedin.com/in/xprabhudayal", icon: Linkedin },
       { name: "LeetCode", url: "https://leetcode.com/u/global-prada", icon: Code2 },
-      { name: "Instagram", url: "https://www.instagram.com/x.p09m21/", icon: Instagram },
+      { name: "Instagram", url: "https://www.instagram.com/ai.pdv/", icon: Instagram },
       { name: "Email", url: "mailto:p09m21@gmail.com", icon: Mail },
     ],
   },

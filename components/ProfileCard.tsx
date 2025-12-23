@@ -11,7 +11,7 @@ interface ProfileCardProps {
 
 export default function ProfileCard({
     imageSrc,
-    name = "PRABHUDAYAL",
+    name = "PDV",
     role = "AI ENGINEER",
     className = "",
 }: ProfileCardProps) {

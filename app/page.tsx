@@ -1,11 +1,11 @@
 'use client';
 
-import Footer from "../components/Footer";
-import { RESUME_DATA } from "../components/constants";
+import Footer from "@/components/Footer";
+import { RESUME_DATA } from "@/components/constants";
 import { ArrowRight, Trophy, Briefcase } from 'lucide-react';
 import Link from 'next/link';
-import { BentoGrid, BentoGridItem } from "../components/ui/BentoGrid";
-import ProfileCard from "../components/ProfileCard";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import ProfileCard from "@/components/ProfileCard";
 
 export default function HomePage() {
   const { achievements, workExperience } = RESUME_DATA;
@@ -38,7 +38,7 @@ export default function HomePage() {
             <div className="lg:flex-shrink-0">
               <ProfileCard
                 imageSrc="/profile-photo.jpg"
-                name="PRABHUDAYAL"
+                name="PDV"
                 role="AI ENGINEER"
                 className="w-64 md:w-72 lg:w-80"
               />
