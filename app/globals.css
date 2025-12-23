@@ -2,100 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-/* SF Pro Display Font Family */
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFPRODISPLAYREGULAR.OTF') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@layer base {
+  :root {
+    /* TRUE NEOBRUTALISM PALETTE */
+    --background: #FFFFFF;
+    /* Stark White */
+    --foreground: #000000;
+    /* Pitch Black */
 
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFPRODISPLAYMEDIUM.OTF') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+    --card: #FFFFFF;
+    --card-foreground: #000000;
 
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+    --primary: #FFDE59;
+    /* Hazard Yellow */
+    --primary-foreground: #000000;
+
+    --secondary: #FF5757;
+    /* Alert Red */
+    --secondary-foreground: #FFFFFF;
+
+    --tertiary: #5CE1E6;
+    /* Electric Cyan */
+    --tertiary-foreground: #000000;
+
+    --muted: #E6E6E6;
+    /* Light Gray */
+    --muted-foreground: #404040;
+
+    --accent: #CB6CE6;
+    /* Vivid Purple */
+    --accent-foreground: #FFFFFF;
+
+    --border: #000000;
+    /* Hard Black Borders */
+
+    --radius: 0px;
+    /* NO ROUNDED CORNERS */
+  }
+
+  .dark {
+    /* Neobrutalism Dark Mode (Full Inversion) */
+    --background: #0f0f0f;
+    --foreground: #FFFFFF;
+
+    --card: #1a1a1a;
+    --card-foreground: #FFFFFF;
+
+    --primary: #FFDE59;
+    --primary-foreground: #000000;
+
+    --secondary: #FF5757;
+    --secondary-foreground: #FFFFFF;
+
+    --tertiary: #5CE1E6;
+    --tertiary-foreground: #000000;
+
+    --muted: #2a2a2a;
+    --muted-foreground: #a0a0a0;
+
+    --accent: #CB6CE6;
+    --accent-foreground: #FFFFFF;
+
+    --border: #FFFFFF;
+  }
 }
 
 @layer base {
-  :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 2%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 2%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 263 70% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 263 70% 50%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 263 70% 50%;
-    --radius: 0.75rem;
-  }
-
   * {
     @apply border-border;
   }
 
-  html {
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-black text-white antialiased;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-background text-foreground antialiased font-mono selection:bg-primary selection:text-black;
   }
 
-  ::selection {
-    background: rgba(168, 85, 247, 0.4);
-    color: white;
-  }
-}
-
-@layer components {
-  .glass {
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans font-black tracking-tight uppercase;
   }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
+@layer utilities {
+  .neo-shadow {
+    box-shadow: 4px 4px 0px 0px var(--border);
+  }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+  .neo-shadow-lg {
+    box-shadow: 8px 8px 0px 0px var(--border);
+  }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
+  .neo-shadow-hover {
+    @apply transition-all duration-200;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  .neo-shadow-hover:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px var(--border);
+  }
+
+  .neo-shadow-active:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px 0px var(--border);
+  }
+
+  .neo-border {
+    @apply border-2 border-black dark:border-white;
+  }
+
+  .neo-card {
+    @apply bg-card text-card-foreground border-2 border-border p-6 neo-shadow;
+  }
+
+  .neo-button {
+    @apply bg-primary text-primary-foreground font-bold px-6 py-3 border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#000000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
+  }
 }
