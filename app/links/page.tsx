@@ -1,7 +1,7 @@
 'use client';
 
-import { RESUME_DATA } from "../../components/constants";
-import Footer from "../../components/Footer";
+import { RESUME_DATA } from "@/components/constants";
+import Footer from "@/components/Footer";
 import { ArrowUpRight } from 'lucide-react';
 
 export default function LinksPage() {
@@ -21,7 +21,7 @@ export default function LinksPage() {
 
                 <div className="flex flex-col gap-6">
                     {allLinks.map((link) => {
-                        const Icon = link.icon as React.ElementType;
+                        const Icon = link.icon as React.ElementType | undefined;
                         return (
                             <a
                                 key={link.name}
