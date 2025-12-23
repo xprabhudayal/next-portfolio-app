@@ -21,8 +21,6 @@ export default function ProfileCard({
             name={name}
             role={role}
             className={className}
-            scaleOnHover={1.05}
-            rotateAmplitude={8}
         />
     );
 }
