@@ -5,6 +5,7 @@ import { RESUME_DATA } from "../components/constants";
 import { ArrowRight, Trophy, Briefcase } from 'lucide-react';
 import Link from 'next/link';
 import { BentoGrid, BentoGridItem } from "../components/ui/BentoGrid";
+import ProfileCard from "../components/ProfileCard";
 
 export default function HomePage() {
   const { achievements, workExperience } = RESUME_DATA;
@@ -15,17 +16,33 @@ export default function HomePage() {
       {/* Brutalist Hero */}
       <div className="relative bg-background border-b-4 border-border">
         <div className="max-w-7xl mx-auto px-4 md:px-8 pt-32 pb-24">
-          <div className="inline-block bg-primary border-2 border-border text-primary-foreground px-6 py-2 font-black text-sm mb-8 neo-shadow rotate-[-2deg] hover:rotate-0 transition-transform cursor-default">
-            ● AVAILABLE FOR WORK
-          </div>
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-[0.85] mb-8">
-            PRABHUDAYAL<br />VAISHNAV.
-          </h1>
-          <div className="max-w-2xl border-l-[6px] border-primary pl-6 ml-2">
-            <p className="text-xl md:text-2xl font-mono leading-tight">
-              AI Engineer & Full-Stack Developer.<br />
-              Building <span className="bg-primary text-primary-foreground px-1 border border-border">INTELLIGENT SYSTEMS</span> causing chaos in the best way possible.
-            </p>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
+
+            {/* Left: Text Content */}
+            <div className="flex-1">
+              <div className="inline-block bg-primary border-2 border-border text-primary-foreground px-6 py-2 font-black text-sm mb-8 neo-shadow rotate-[-2deg] hover:rotate-0 transition-transform cursor-default">
+                ● AVAILABLE FOR WORK
+              </div>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.85] mb-8">
+                PRABHUDAYAL<br />VAISHNAV.
+              </h1>
+              <div className="max-w-2xl border-l-[6px] border-primary pl-6 ml-2">
+                <p className="text-xl md:text-2xl font-mono leading-tight">
+                  AI Engineer & Full-Stack Developer.<br />
+                  Building <span className="bg-primary text-primary-foreground px-1 border border-border">INTELLIGENT SYSTEMS</span> causing chaos in the best way possible.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: Profile Card */}
+            <div className="lg:flex-shrink-0">
+              <ProfileCard
+                imageSrc="/profile-photo.jpg"
+                name="PRABHUDAYAL"
+                role="AI ENGINEER"
+                className="w-64 md:w-72 lg:w-80"
+              />
+            </div>
           </div>
         </div>
       </div>
