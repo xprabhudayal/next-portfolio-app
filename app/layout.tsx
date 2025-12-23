@@ -1,22 +1,38 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Oswald, Courier_Prime } from 'next/font/google';
 import ClientLayout from '../components/ClientLayout';
 
+// Bold, condensed font for headings
+const oswald = Oswald({
+    subsets: ['latin'],
+    variable: '--font-oswald',
+    display: 'swap',
+});
+
+// Raw, typewriter font for body
+const courier = Courier_Prime({
+    weight: ['400', '700'],
+    subsets: ['latin'],
+    variable: '--font-courier',
+    display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Prabhudayal Vaishnav - AI Engineer & Full-Stack Developer',
-  description: 'Portfolio of Prabhudayal Vaishnav - AI Engineer, Full-Stack Developer, and Research Intern at ESIEA Paris',
+    title: 'PRABHUDAYAL VAISHNAV // DEV',
+    description: 'AI ENGINEER. FULL STACK. NO NONSENSE.',
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>
-        <ClientLayout>{children}</ClientLayout>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={`${oswald.variable} ${courier.variable} font-mono bg-background text-foreground`}>
+                <ClientLayout>{children}</ClientLayout>
+            </body>
+        </html>
+    );
 }
