@@ -1,8 +1,8 @@
 'use client';
 
 import { ArrowDown, Briefcase, GraduationCap, Trophy } from 'lucide-react';
-import Footer from '../../components/Footer';
-import { RESUME_DATA } from '../../components/constants';
+import Footer from '@/components/Footer';
+import { RESUME_DATA } from '@/components/constants';
 
 export default function ResumePage() {
   const { workExperience, education, achievements, skills, summary } = RESUME_DATA;

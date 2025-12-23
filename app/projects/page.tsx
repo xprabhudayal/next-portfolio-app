@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { RESUME_DATA } from '../../components/constants';
+import { RESUME_DATA } from '@/components/constants';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function ProjectsPage() {
