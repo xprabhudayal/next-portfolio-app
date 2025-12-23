@@ -25,8 +25,8 @@ export default function TiltedCard({
     name,
     role,
     className = '',
-    scaleOnHover = 1.05,
-    rotateAmplitude = 8,
+    scaleOnHover = 1.1,
+    rotateAmplitude = 14,
 }: TiltedCardProps) {
     const ref = useRef<HTMLDivElement>(null);
     const rotateX = useSpring(useMotionValue(0), springValues);
@@ -64,17 +64,14 @@ export default function TiltedCard({
     return (
         <div
             ref={ref}
-            className={`relative group [perspective:800px] ${className}`}
+            className={`relative [perspective:800px] ${className}`}
             onMouseMove={handleMouse}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Neobrutal Shadow Layer */}
-            <div className="absolute inset-0 bg-border translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-200" />
-
             {/* Main Card Container */}
             <motion.div
-                className="relative bg-card border-4 border-border overflow-hidden transition-all duration-200 [transform-style:preserve-3d]"
+                className="relative bg-white dark:bg-neutral-900 rounded-[25px] border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-lg [transform-style:preserve-3d]"
                 style={{
                     rotateX,
                     rotateY,
@@ -87,19 +84,18 @@ export default function TiltedCard({
                         src={imageSrc}
                         alt={name}
                         fill
-                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 [transform:translateZ(0)]"
+                        className="object-cover [transform:translateZ(0)] will-change-transform"
                         priority
                     />
-                    {/* Yellow overlay on hover */}
-                    <div className="absolute inset-0 bg-primary mix-blend-multiply opacity-30 group-hover:opacity-0 transition-opacity duration-300" />
                 </div>
 
                 {/* Info Bar */}
-                <div className="bg-foreground text-background p-4 border-t-4 border-border">
-                    <p className="font-black text-lg uppercase tracking-wider">{name}</p>
-                    <p className="font-mono text-sm text-muted-foreground">{role}</p>
+                <div className="bg-white dark:bg-neutral-900 p-6 border-t border-neutral-200 dark:border-neutral-800">
+                    <p className="font-bold text-xl text-neutral-900 dark:text-white">{name}</p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{role}</p>
                 </div>
             </motion.div>
         </div>
     );
 }
+
