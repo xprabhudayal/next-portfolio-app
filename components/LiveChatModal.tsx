@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { SYSTEM_INSTRUCTION } from './constants';
-import { XIcon, MicIcon, Volume2Icon } from './Icons';
+import { X as XIcon, Mic as MicIcon, Volume2 as Volume2Icon } from 'lucide-react';
 import { AsyncQueue } from '../utils/AsyncQueue';
 
 // Audio utility functions
@@ -268,7 +268,7 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
 
         // Dynamically import geminiService to avoid SSR issues
         const { startLiveConversation } = await import('../services/geminiService');
-        
+
         const session = await startLiveConversation({
           onopen: () => {
             if (!mounted || !inputAudioContextRef.current) {
@@ -376,11 +376,10 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
                 </div>
               )}
               <div
-                className={`px-4 py-3 rounded-2xl max-w-md text-sm ${
-                  t.speaker === 'user' 
-                    ? 'bg-gradient-to-r from-sky-500/20 to-indigo-500/20 border border-sky-500/20 text-white' 
+                className={`px-4 py-3 rounded-2xl max-w-md text-sm ${t.speaker === 'user'
+                    ? 'bg-gradient-to-r from-sky-500/20 to-indigo-500/20 border border-sky-500/20 text-white'
                     : 'bg-white/5 border border-white/10 text-white/80'
-                } ${t.isFinal ? '' : 'opacity-60'}`}
+                  } ${t.isFinal ? '' : 'opacity-60'}`}
               >
                 {t.text}
               </div>

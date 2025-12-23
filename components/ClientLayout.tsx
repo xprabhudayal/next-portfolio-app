@@ -1,13 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import Navbar from './Navbar';
 import TalkAboutMeButton from './TalkAboutMeButton';
-
-const LiveChatModal = dynamic(() => import('./LiveChatModal'), {
-  ssr: false,
-});
+import LiveChatModal from './LiveChatModal';
 
 export default function ClientLayout({
   children,
@@ -18,10 +14,10 @@ export default function ClientLayout({
 
   return (
     <>
-      <div className="relative z-10">
-        <Navbar />
-        <main className="w-full min-h-screen">{children}</main>
-      </div>
+      <Navbar />
+      <main className="w-full min-h-screen pt-16 bg-background">
+        {children}
+      </main>
 
       <TalkAboutMeButton onClick={() => setShowModal(true)} />
       {showModal && <LiveChatModal onClose={() => setShowModal(false)} />}
