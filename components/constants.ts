@@ -44,7 +44,7 @@ export const RESUME_DATA: ResumeData = {
         "Architected a multi-strategy RAG system achieving 88% query accuracy, outperforming naive RAG by 4.8% through semantic search and Chain-of-Thought.",
         "Implemented LangGraph-based agent workflows with 5+ specialized nodes, reducing errors by 15%.",
       ],
-      url: "https://github.com/xprabhudayal/grand-plaza",
+      url: "https://github.com/xprabhudayal/grand-plaza-monorepo",
       image: "/images/projects/grand-plaza.png"
     },
     {
@@ -60,6 +60,39 @@ export const RESUME_DATA: ResumeData = {
       image: "/images/projects/career-scout.png"
     },
     {
+      title: "WhatsApp Agent: Voice AI Assistant",
+      tech: ["Python", "WhatsApp API", "Voice AI", "LLMs"],
+      description: "WhatsApp-based voice agent for automated conversations and assistance.",
+      points: [
+        "Built voice-enabled WhatsApp bot for natural conversations.",
+        "Integrated with modern LLMs for intelligent responses."
+      ],
+      url: "https://github.com/xprabhudayal/whatsapp-agent",
+      image: "/images/projects/whatsapp-agent.png"
+    },
+    {
+      title: "Mira: AI-Powered Data Insights",
+      tech: ["TypeScript", "AI", "Data Visualization", "Analytics"],
+      description: "Upload any CSV, get instant AI-powered insights with beautiful visualizations.",
+      points: [
+        "AI-powered analysis of CSV data with automated insights generation.",
+        "Beautiful, interactive visualizations for data exploration."
+      ],
+      url: "https://github.com/xprabhudayal/mira",
+      image: "/images/projects/mira.png"
+    },
+    {
+      title: "Idea Forge: AI Ideation Agent",
+      tech: ["Python", "LLMs", "Hackathon", "Agent Framework"],
+      description: "An AI-powered agent for idea generation, suitable for hackathons and iterative ideation.",
+      points: [
+        "Built for incremental, iterative approach to idea generation.",
+        "Designed for hackathon and brainstorming use cases."
+      ],
+      url: "https://github.com/xprabhudayal/idea-forge",
+      image: "/images/projects/idea-forge.png"
+    },
+    {
       title: "The AI Scientist: Sakana AI Contributor",
       tech: ["Python", "LLMs", "Transformers", "Git"],
       description: "Contributed to Sakana AI's Open Source project to automate scientific research.",
@@ -68,7 +101,7 @@ export const RESUME_DATA: ResumeData = {
         "Adapted the project for T4 GPU support, reducing reliance on high-end GPUs.",
         "Co-authored a paper: 'Exploring Style Transfer with Small Character-Level Transformers' using Qwen2.5(72B)."
       ],
-      url: "https://github.com/xprabhudayal/sakana-ai-contribution",
+      url: "https://github.com/xprabhudayal/AI-Scientist",
       image: "/images/projects/sakana-ai.png"
     },
     {
@@ -79,7 +112,7 @@ export const RESUME_DATA: ResumeData = {
         "Released a Python package to create accessible endpoints for over 99% of Hugging Face-hosted LLMs.",
         "Leveraged Ngrok to tunnel requests from localhost to the cloud securely."
       ],
-      url: "https://github.com/xprabhudayal/xs-python",
+      url: "https://github.com/xprabhudayal/xs",
       image: "/images/projects/xs-module.webp"
     },
     {
