@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { RESUME_DATA } from '../../components/constants';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -10,92 +9,78 @@ export default function ProjectsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="w-full min-h-screen bg-black pt-32 pb-20 px-4 sm:px-6 md:px-8 lg:px-16">
-      {/* Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/10 rounded-full blur-[150px]" />
-      </div>
+    <div className="w-full min-h-screen bg-background pt-32 pb-20 px-4 sm:px-6 md:px-8 lg:px-16 text-foreground">
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 text-center"
-        >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white">
-            Projects
+        <div className="mb-16 border-b-4 border-border pb-8">
+          <h1 className="text-7xl md:text-9xl font-black uppercase mb-4 tracking-tighter">
+            WORK.
           </h1>
-          <p className="text-lg text-white/40 max-w-xl mx-auto">
-            A collection of my work in AI, full-stack development, and open source
+          <p className="text-xl font-mono text-muted-foreground max-w-2xl bg-primary text-primary-foreground inline-block px-2">
+            AI ENG • FULL STACK • OPEN SOURCE
           </p>
-        </motion.div>
+        </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {RESUME_DATA.projects.map((project, index) => {
             const isLarge = index % 5 === 0 || index % 5 === 3;
             const colSpan = isLarge ? 'md:col-span-2' : 'md:col-span-1';
 
             return (
-              <motion.a
+              <a
                 key={project.title}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`group relative ${colSpan} rounded-2xl overflow-hidden bg-white/[0.02] border border-white/[0.04] transition-all duration-500 hover:bg-white/[0.04] hover:border-white/[0.08]`}
+                className={`group relative ${colSpan} bg-card text-card-foreground border-2 border-border p-0 neo-shadow hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-200 flex flex-col`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {project.image && (
-                  <div className="relative w-full h-48 sm:h-56 overflow-hidden">
+                {project.image ? (
+                  <div className="relative w-full h-56 md:h-64 overflow-hidden border-b-2 border-border grayscale group-hover:grayscale-0 transition-all duration-500">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                    <div className="absolute inset-0 bg-primary mix-blend-multiply opacity-20 group-hover:opacity-0 transition-all" />
+                  </div>
+                ) : (
+                  <div className="h-56 w-full bg-muted border-b-2 border-border flex items-center justify-center">
+                    <span className="font-black text-4xl text-muted-foreground uppercase rotate-[-10deg]">No Image</span>
                   </div>
                 )}
 
-                <div className="p-5 space-y-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-xl font-semibold text-white group-hover:text-violet-300 transition-colors">
+                <div className="p-6 flex flex-col h-full">
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <h3 className="text-2xl font-black uppercase leading-none group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       {project.title}
                     </h3>
-                    <ArrowUpRight className={`w-5 h-5 text-white/20 group-hover:text-white/60 transition-all ${hoveredIndex === index ? 'translate-x-0.5 -translate-y-0.5' : ''}`} />
+                    <div className="p-1 border-2 border-border bg-foreground text-background group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      <ArrowUpRight className="w-6 h-6" />
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="px-2.5 py-1 text-xs rounded-full bg-white/[0.04] border border-white/[0.06] text-white/50">
+                      <span key={tech} className="px-2 py-1 text-xs font-bold font-mono border border-border uppercase">
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <p className="text-sm text-white/30 leading-relaxed">
+                  <p className="text-sm font-mono text-muted-foreground leading-relaxed mb-6 flex-grow">
                     {project.description}
                   </p>
 
-                  {project.points.length > 0 && (
-                    <ul className="space-y-1.5 text-sm text-white/40">
-                      {project.points.slice(0, isLarge ? 3 : 2).map((point, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-violet-400 mt-0.5">•</span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <div className="mt-auto pt-4 border-t border-border border-dashed">
+                    <span className="text-xs font-black uppercase text-muted-foreground">View Source</span>
+                  </div>
                 </div>
-              </motion.a>
+              </a>
             );
           })}
         </div>
