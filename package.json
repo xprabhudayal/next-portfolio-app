@@ -15,7 +15,7 @@
     "caniuse-lite": "^1.0.30001753",
     "clsx": "^2.1.1",
     "gsap": "^3.14.2",
-    "lucide-react": "^0.555.0",
+    "lucide-react": "^0.562.0",
     "motion": "^12.23.26",
     "next": "15.3.6",
     "postcss": "^8.5.3",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.3",
     "typescript": "^5.9.3"
   }
 }
