@@ -38,10 +38,14 @@
 
     --radius: 0px;
     /* NO ROUNDED CORNERS */
+
+    /* Custom Cursors */
+    --cursor-default: url('/cursors/cursor-light.svg');
+    --cursor-pointer: url('/handpointing.svg');
   }
 
   .dark {
-    /* Neobrutalism Dark Mode (Full Inversion) */
+    /* Neobrutalism Dark Mode */
     --background: #0f0f0f;
     --foreground: #FFFFFF;
 
@@ -64,12 +68,16 @@
     --accent-foreground: #FFFFFF;
 
     --border: #FFFFFF;
+
+    /* Dark mode cursor */
+    --cursor-default: url('/cursors/cursor-dark.svg');
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    cursor: var(--cursor-default), auto;
   }
 
   body {
@@ -83,6 +91,19 @@
   h5,
   h6 {
     @apply font-sans font-black tracking-tight uppercase;
+  }
+
+  /* Interactive elements get pointer cursor */
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  select,
+  label[for],
+  .cursor-pointer {
+    cursor: var(--cursor-pointer), pointer;
   }
 }
 
@@ -110,7 +131,7 @@
   }
 
   .neo-border {
-    @apply border-2 border-black dark:border-white;
+    @apply border-2 border-border;
   }
 
   .neo-card {
@@ -118,6 +139,14 @@
   }
 
   .neo-button {
-    @apply bg-primary text-primary-foreground font-bold px-6 py-3 border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#000000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
+    @apply bg-primary text-primary-foreground font-bold px-6 py-3 border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
+    --tw-shadow-color: var(--border);
   }
+}
+
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
