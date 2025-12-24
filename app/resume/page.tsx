@@ -8,20 +8,20 @@ export default function ResumePage() {
   const { workExperience, education, achievements, skills, summary } = RESUME_DATA;
 
   return (
-    <main className="min-h-screen bg-background text-black pt-32">
+    <main className="min-h-screen bg-background text-foreground pt-32">
       <div className="max-w-4xl mx-auto px-6 pb-20">
 
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b-4 border-black pb-8 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b-4 border-border pb-8 gap-6">
           <div>
-            <h1 className="text-7xl md:text-9xl font-black uppercase tracking-tighter mb-4">
+            <h1 className="text-7xl md:text-9xl font-black uppercase tracking-tighter mb-4 text-foreground dark:text-white">
               RESUME.
             </h1>
-            <p className="text-xl font-mono text-neutral-600 bg-primary inline-block px-2 border border-black">
+            <p className="text-xl font-mono text-primary-foreground bg-primary inline-block px-2 border border-border">
               FULL PROFESSIONAL HISTORY
             </p>
           </div>
 
-          <a href="/resume.pdf" download className="bg-white text-black px-6 py-3 font-bold border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-300 ease-snappy flex items-center gap-2 uppercase">
+          <a href="/resume.pdf" download className="bg-card text-card-foreground px-6 py-3 font-bold border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px] transition-all duration-300 ease-snappy flex items-center gap-2 uppercase">
             Download PDF <ArrowDown size={20} />
           </a>
         </div>
@@ -30,36 +30,36 @@ export default function ResumePage() {
           {/* Left Column: Summary & Skills */}
           <div className="md:col-span-4 flex flex-col gap-12">
             <section>
-              <h3 className="text-2xl font-black uppercase mb-4 border-b-2 border-black pb-2">About</h3>
-              <p className="font-mono text-sm leading-relaxed text-neutral-800">
+              <h3 className="text-2xl font-black uppercase mb-4 border-b-2 border-border pb-2">About</h3>
+              <p className="font-mono text-sm leading-relaxed text-muted-foreground">
                 {summary}
               </p>
             </section>
 
             <section>
-              <h3 className="text-2xl font-black uppercase mb-4 border-b-2 border-black pb-2">Skills</h3>
+              <h3 className="text-2xl font-black uppercase mb-4 border-b-2 border-border pb-2">Skills</h3>
               <div className="space-y-6">
                 <div>
-                  <h4 className="font-bold text-sm uppercase mb-2 bg-neutral-100 inline-block px-1">Programming</h4>
+                  <h4 className="font-bold text-sm uppercase mb-2 bg-muted text-muted-foreground inline-block px-1">Programming</h4>
                   <div className="flex flex-wrap gap-2">
                     {skills.programming.map(skill => (
-                      <span key={skill} className="text-xs font-mono border border-black px-2 py-1">{skill}</span>
+                      <span key={skill} className="text-xs font-mono border border-border px-2 py-1">{skill}</span>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm uppercase mb-2 bg-neutral-100 inline-block px-1">AI & ML</h4>
+                  <h4 className="font-bold text-sm uppercase mb-2 bg-muted text-muted-foreground inline-block px-1">AI & ML</h4>
                   <div className="flex flex-wrap gap-2">
                     {skills.ai_ml.map(skill => (
-                      <span key={skill} className="text-xs font-mono border border-black px-2 py-1">{skill}</span>
+                      <span key={skill} className="text-xs font-mono border border-border px-2 py-1">{skill}</span>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm uppercase mb-2 bg-neutral-100 inline-block px-1">Data</h4>
+                  <h4 className="font-bold text-sm uppercase mb-2 bg-muted text-muted-foreground inline-block px-1">Data</h4>
                   <div className="flex flex-wrap gap-2">
                     {skills.data.map(skill => (
-                      <span key={skill} className="text-xs font-mono border border-black px-2 py-1">{skill}</span>
+                      <span key={skill} className="text-xs font-mono border border-border px-2 py-1">{skill}</span>
                     ))}
                   </div>
                 </div>
@@ -67,16 +67,16 @@ export default function ResumePage() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-black uppercase mb-4 border-b-2 border-black pb-2">Education</h3>
+              <h3 className="text-2xl font-black uppercase mb-4 border-b-2 border-border pb-2">Education</h3>
               {education.map((edu, idx) => (
                 <div key={idx} className="mb-6 last:mb-0">
                   <div className="flex items-center gap-2 mb-1">
                     <GraduationCap size={16} />
-                    <span className="text-xs font-bold uppercase bg-tertiary px-1 border border-black">{edu.date}</span>
+                    <span className="text-xs font-bold uppercase bg-tertiary text-tertiary-foreground px-1 border border-border">{edu.date}</span>
                   </div>
                   <h4 className="font-bold leading-tight mb-1">{edu.degree}</h4>
-                  <p className="text-xs font-mono text-neutral-600 mb-1">{edu.institution}</p>
-                  <p className="text-xs font-mono text-neutral-500 italic">{edu.details}</p>
+                  <p className="text-xs font-mono text-muted-foreground mb-1">{edu.institution}</p>
+                  <p className="text-xs font-mono text-muted-foreground italic">{edu.details}</p>
                 </div>
               ))}
             </section>
@@ -91,18 +91,18 @@ export default function ResumePage() {
 
               <div className="space-y-8">
                 {workExperience.map((job, idx) => (
-                  <div key={idx} className="relative pl-8 border-l-2 border-black group">
-                    <div className="absolute -left-[9px] top-0 w-4 h-4 bg-white border-2 border-black group-hover:bg-primary transition-colors duration-300" />
+                  <div key={idx} className="relative pl-8 border-l-2 border-border group">
+                    <div className="absolute -left-[9px] top-0 w-4 h-4 bg-background border-2 border-border group-hover:bg-primary transition-colors duration-300" />
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                       <h4 className="text-xl font-bold uppercase">{job.title}</h4>
-                      <span className="text-xs font-mono font-bold bg-black text-white px-2 py-1">{job.date}</span>
+                      <span className="text-xs font-mono font-bold bg-foreground text-background px-2 py-1">{job.date}</span>
                     </div>
-                    <h5 className="text-sm font-bold uppercase text-neutral-600 mb-4">{job.company}</h5>
+                    <h5 className="text-sm font-bold uppercase text-muted-foreground mb-4">{job.company}</h5>
 
                     <ul className="list-disc list-inside space-y-2">
                       {job.points.map((point, pIdx) => (
-                        <li key={pIdx} className="text-sm font-mono leading-relaxed text-neutral-800">
+                        <li key={pIdx} className="text-sm font-mono leading-relaxed text-muted-foreground">
                           {point}
                         </li>
                       ))}
@@ -119,11 +119,11 @@ export default function ResumePage() {
 
               <div className="space-y-6">
                 {achievements.map((item, idx) => (
-                  <div key={idx} className="bg-neutral-50 border-2 border-black p-6 neo-shadow hover:bg-white hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-300 ease-snappy">
+                  <div key={idx} className="bg-card text-card-foreground border-2 border-border p-6 neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px] transition-all duration-300 ease-snappy">
                     <h4 className="text-lg font-bold uppercase mb-2">{item.title}</h4>
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xs font-mono bg-secondary text-white px-2 py-0.5 border border-black">{item.organization}</span>
-                      <span className="text-xs font-mono text-neutral-500">{item.date}</span>
+                      <span className="text-xs font-mono bg-secondary text-secondary-foreground px-2 py-0.5 border border-border">{item.organization}</span>
+                      <span className="text-xs font-mono text-muted-foreground">{item.date}</span>
                     </div>
                     <ul className="list-disc list-inside space-y-1">
                       {item.points.map((point, pIdx) => (

@@ -31,7 +31,7 @@ export default function LinksPage() {
                                 className="group relative block"
                             >
                                 {/* Shadow layer - stays fixed */}
-                                <div className="absolute inset-0 bg-border translate-x-1 translate-y-1" />
+                                <div className="absolute inset-0 bg-border dark:bg-white translate-x-1 translate-y-1" />
                                 {/* Main card - pushes DOWN on hover (neo-brutal style) */}
                                 <div className="relative bg-card text-card-foreground border-2 border-border p-6 flex items-center justify-between transition-all duration-150 group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-active:translate-x-[4px] group-active:translate-y-[4px]">
                                     <div className="flex items-center gap-4">
@@ -50,7 +50,7 @@ export default function LinksPage() {
                         className="group relative block mt-8"
                     >
                         <div className="absolute inset-0 bg-primary translate-x-1 translate-y-1" />
-                        <div className="relative bg-foreground text-background border-2 border-border p-6 flex items-center justify-center transition-all duration-150 group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-active:translate-x-[4px] group-active:translate-y-[4px]">
+                        <div className="relative bg-primary text-primary-foreground border-2 border-border p-6 flex items-center justify-center transition-all duration-150 group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-active:translate-x-[4px] group-active:translate-y-[4px]">
                             <span className="text-2xl md:text-3xl font-black uppercase tracking-widest">
                                 SEND EMAIL
                             </span>

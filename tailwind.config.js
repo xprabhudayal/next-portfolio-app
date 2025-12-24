@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// Refresh
 module.exports = {
     darkMode: ['class'],
     content: [
@@ -56,22 +57,32 @@ module.exports = {
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)'
             },
-            animation: {
-                marquee: 'marquee 25s linear infinite',
-                marquee2: 'marquee2 25s linear infinite',
-            },
-            transitionTimingFunction: {
-                'snappy': 'cubic-bezier(0.16, 1, 0.3, 1)',
+            borderWidth: {
+                DEFAULT: '1px',
+                '0': '0',
+                '2': 'var(--border-width)',
+                '3': '3px',
+                '4': '4px',
+                '8': '8px',
             },
             keyframes: {
                 marquee: {
-                    '0%': { transform: 'translateX(0%)' },
-                    '100%': { transform: 'translateX(-100%)' },
+                    from: { transform: "translateX(0)" },
+                    to: { transform: "translateX(calc(-100% - var(--gap)))" },
                 },
-                marquee2: {
-                    '0%': { transform: 'translateX(100%)' },
-                    '100%': { transform: 'translateX(0%)' },
+                "marquee-vertical": {
+                    from: { transform: "translateY(0)" },
+                    to: { transform: "translateY(calc(-100% - var(--gap)))" },
                 },
+                blink: {
+                    "0%, 100%": { filter: "brightness(1)" },
+                    "50%": { filter: "brightness(0.7)" },
+                },
+            },
+            animation: {
+                marquee: "marquee var(--duration) linear infinite",
+                "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+                blink: "blink 0.2s ease-in-out",
             },
         }
     },

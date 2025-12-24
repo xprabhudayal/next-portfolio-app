@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* styling refresh */
 
 @layer base {
   :root {
@@ -35,21 +36,21 @@
 
     --border: #000000;
     /* Hard Black Borders */
+    --border-width: 2px;
+    --shadow-color: #000000;
 
     --radius: 0px;
     /* NO ROUNDED CORNERS */
-
-    /* Custom Cursors */
-    --cursor-default: url('/cursors/cursor-light.svg');
-    --cursor-pointer: url('/handpointing.svg');
   }
 
   .dark {
     /* Neobrutalism Dark Mode */
-    --background: #0f0f0f;
+    --background: #0a0a0a;
+    /* Rich Black */
     --foreground: #FFFFFF;
 
-    --card: #1a1a1a;
+    --card: #111111;
+    /* Dark Charcoal */
     --card-foreground: #FFFFFF;
 
     --primary: #FFDE59;
@@ -67,17 +68,30 @@
     --accent: #CB6CE6;
     --accent-foreground: #FFFFFF;
 
-    --border: #FFFFFF;
+    --border: #e5e5e5;
+    /* Off-white */
+    --border-width: 3px;
+    /* Thicker borders in dark mode */
+    --shadow-color: #333333;
+    /* Darker shadow base */
+  }
+}
 
-    /* Dark mode cursor */
-    --cursor-default: url('/cursors/cursor-dark.svg');
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+  }
+
+  .text-stroke-black {
+    -webkit-text-stroke: 1px #000;
+    color: transparent;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
-    cursor: var(--cursor-default), auto;
   }
 
   body {
@@ -103,17 +117,17 @@
   select,
   label[for],
   .cursor-pointer {
-    cursor: var(--cursor-pointer), pointer;
+    cursor: pointer;
   }
 }
 
 @layer utilities {
   .neo-shadow {
-    box-shadow: 4px 4px 0px 0px var(--border);
+    box-shadow: 4px 4px 0px 0px var(--shadow-color);
   }
 
   .neo-shadow-lg {
-    box-shadow: 8px 8px 0px 0px var(--border);
+    box-shadow: 8px 8px 0px 0px var(--shadow-color);
   }
 
   .neo-shadow-hover {
@@ -122,12 +136,12 @@
 
   .neo-shadow-hover:hover {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px 0px var(--border);
+    box-shadow: 2px 2px 0px 0px var(--shadow-color);
   }
 
   .neo-shadow-active:active {
     transform: translate(4px, 4px);
-    box-shadow: 0px 0px 0px 0px var(--border);
+    box-shadow: 0px 0px 0px 0px var(--shadow-color);
   }
 
   .neo-border {
@@ -140,7 +154,7 @@
 
   .neo-button {
     @apply bg-primary text-primary-foreground font-bold px-6 py-3 border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
-    --tw-shadow-color: var(--border);
+    --tw-shadow-color: var(--shadow-color);
   }
 }
 

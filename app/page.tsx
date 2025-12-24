@@ -35,7 +35,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: Profile Card */}
-            <div className="lg:flex-shrink-0">
+            <div className="flex justify-center lg:block lg:flex-shrink-0">
               <ProfileCard
                 imageSrc="/profile-photo.jpg"
                 name="PDV"
