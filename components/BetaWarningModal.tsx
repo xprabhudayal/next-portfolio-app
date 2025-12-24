@@ -53,10 +53,10 @@ export default function BetaWarningModal({ onClose, onStart }: BetaWarningModalP
                         </h2>
                     </div>
                     <p className="font-mono text-sm font-bold leading-relaxed text-muted-foreground">
-                        This "Talk to AI" feature is currently in <span className="text-primary bg-foreground px-1">BETA</span> and relies on experimental WebSocket connections. It is fragile and may break unexpectedly.
+                        This feature is currently in <span className="text-primary bg-foreground px-1">BETA</span>. It is experimental and may break unexpectedly.
                     </p>
                     <p className="font-mono text-sm font-bold leading-relaxed text-muted-foreground">
-                        Please feel free to provide feedback via social media if you encounter issues.
+                        Please feel free to provide feedback via social media if you encounter any bugs.
                     </p>
                 </div>
 

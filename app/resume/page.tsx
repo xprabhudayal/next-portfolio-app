@@ -21,8 +21,12 @@ export default function ResumePage() {
             </p>
           </div>
 
-          <a href="/resume.pdf" download className="bg-card text-card-foreground px-6 py-3 font-bold border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px] transition-all duration-300 ease-snappy flex items-center gap-2 uppercase">
-            Download PDF <ArrowDown size={20} />
+          <a
+            href="/docs/updated_2page_resume.pdf"
+            download
+            className="h-12 flex items-center gap-2 px-6 font-bold text-sm border-2 border-border transition-all duration-200 uppercase tracking-wide bg-background text-foreground neo-shadow hover:bg-primary hover:text-primary-foreground hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none active:animate-blink"
+          >
+            Download PDF <ArrowDown size={18} />
           </a>
         </div>
 

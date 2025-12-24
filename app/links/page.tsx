@@ -16,9 +16,16 @@ export default function LinksPage() {
     return (
         <main className="min-h-screen bg-background text-foreground flex flex-col">
             <div className="flex-grow pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto w-full">
-                <h1 className="text-6xl md:text-8xl font-black uppercase mb-12 border-b-4 border-border pb-4 text-center md:text-left">
-                    Links.
-                </h1>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b-4 border-border pb-8 gap-6">
+                    <div>
+                        <h1 className="text-7xl md:text-9xl font-black uppercase tracking-tighter mb-4 text-foreground dark:text-white">
+                            LINKS.
+                        </h1>
+                        <p className="text-xl font-mono text-primary-foreground bg-primary inline-block px-2 border border-border">
+                            CONNECT WITH ME
+                        </p>
+                    </div>
+                </div>
 
                 <div className="flex flex-col gap-6">
                     {allLinks.map((link) => {
