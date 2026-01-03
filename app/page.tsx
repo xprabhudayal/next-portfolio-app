@@ -37,7 +37,7 @@ export default function HomePage() {
             {/* Right: Profile Card */}
             <div className="flex justify-center lg:block lg:flex-shrink-0">
               <ProfileCard
-                imageSrc="/profile-photo.jpg"
+                imageSrc="/profile-photo.webp"
                 name="PDV"
                 role="AI ENGINEER"
                 className="w-64 md:w-72 lg:w-80"

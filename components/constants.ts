@@ -45,7 +45,7 @@ export const RESUME_DATA: ResumeData = {
         "Implemented LangGraph-based agent workflows with 5+ specialized nodes, reducing errors by 15%.",
       ],
       url: "https://github.com/xprabhudayal/grand-plaza-monorepo",
-      image: "/images/projects/grand-plaza.png"
+      image: "/images/projects/grand-plaza.webp"
     },
     {
       title: "Career Scout: Voice AI-Powered Job Search Assistant",
@@ -57,7 +57,7 @@ export const RESUME_DATA: ResumeData = {
         "Built a responsive, Supabase-authenticated frontend with React hooks, reducing voice interaction latency by 40%."
       ],
       url: "https://github.com/xprabhudayal/career-scout",
-      image: "/images/projects/career-scout.png"
+      image: "/images/projects/career-scout.webp"
     },
     {
       title: "WhatsApp Agent: Voice AI Assistant",
@@ -68,7 +68,7 @@ export const RESUME_DATA: ResumeData = {
         "Integrated with modern LLMs for intelligent responses."
       ],
       url: "https://github.com/xprabhudayal/whatsapp-agent",
-      image: "/images/projects/whatsapp-agent.png"
+      image: "/images/projects/whatsapp-agent.webp"
     },
     {
       title: "Mira: AI-Powered Data Insights",
@@ -79,7 +79,7 @@ export const RESUME_DATA: ResumeData = {
         "Beautiful, interactive visualizations for data exploration."
       ],
       url: "https://github.com/xprabhudayal/mira",
-      image: "/images/projects/mira.png"
+      image: "/images/projects/mira.webp"
     },
     {
       title: "Idea Forge: AI Ideation Agent",
@@ -90,7 +90,7 @@ export const RESUME_DATA: ResumeData = {
         "Designed for hackathon and brainstorming use cases."
       ],
       url: "https://github.com/xprabhudayal/idea-forge",
-      image: "/images/projects/idea-forge.png"
+      image: "/images/projects/idea-forge.webp"
     },
     {
       title: "The AI Scientist: Sakana AI Contributor",
@@ -102,7 +102,7 @@ export const RESUME_DATA: ResumeData = {
         "Co-authored a paper: 'Exploring Style Transfer with Small Character-Level Transformers' using Qwen2.5(72B)."
       ],
       url: "https://github.com/xprabhudayal/AI-Scientist",
-      image: "/images/projects/sakana-ai.png"
+      image: "/images/projects/sakana-ai.webp"
     },
     {
       title: "XS Python: Module & API Creation",

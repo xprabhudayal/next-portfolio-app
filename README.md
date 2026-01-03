@@ -48,7 +48,8 @@ A modern, AI-integrated portfolio website built with Next.js 15, TypeScript, and
 │   ├── fonts/             # SF Pro Display fonts
 │   ├── docs/              # Project images and resume PDF
 │   ├── lanyard.glb        # 3D model
-│   └── band.jpg           # Lanyard texture
+│   ├── band.webp           # Lanyard texture
+│   ├── file.svg
 └── tailwind.config.js     # Tailwind with Apple design tokens
 ```
 
