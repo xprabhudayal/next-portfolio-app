@@ -53,6 +53,7 @@ export default function Navbar() {
         <button
           className="md:hidden pointer-events-auto h-12 w-12 flex items-center justify-center border-2 border-border neo-shadow bg-background text-foreground active:animate-blink transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close Menu" : "Open Menu"}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

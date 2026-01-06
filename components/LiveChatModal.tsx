@@ -349,20 +349,77 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
     };
   }, [cleanup, processTurn]);
 
+  // Focus trap
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const focusableElements = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+
+        if (!focusableElements || focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Auto-focus the close button on open
+    const closeBtn = modalRef.current?.querySelector('button');
+    if (closeBtn) (closeBtn as HTMLElement).focus();
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 bg-[#030014]/90 backdrop-blur-2xl z-50 flex items-center justify-center">
+    <div
+      className="fixed inset-0 bg-[#030014]/90 backdrop-blur-2xl z-50 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="live-chat-title"
+    >
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-sky-500/10 via-indigo-500/10 to-violet-500/10 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative bg-white/[0.02] border border-white/[0.08] rounded-3xl w-full max-w-2xl h-[80vh] flex flex-col p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+      <div
+        ref={modalRef}
+        className="relative bg-white/[0.02] border border-white/[0.08] rounded-3xl w-full max-w-2xl h-[80vh] flex flex-col p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+      >
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/[0.05]">
           <div>
-            <h2 className="text-xl font-semibold text-white">Live Conversation</h2>
+            <h2 id="live-chat-title" className="text-xl font-semibold text-white">Live Conversation</h2>
             <p className="text-sm text-white/40 mt-1">AI-powered voice chat</p>
           </div>
-          <button onClick={onClose} className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+          <button
+            onClick={onClose}
+            className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-sky-500/50"
+            aria-label="Close chat"
+          >
             <XIcon className="w-5 h-5 text-white/70" />
           </button>
         </div>
@@ -377,8 +434,8 @@ export default function LiveChatModal({ onClose }: { onClose: () => void }) {
               )}
               <div
                 className={`px-4 py-3 rounded-2xl max-w-md text-sm ${t.speaker === 'user'
-                    ? 'bg-gradient-to-r from-sky-500/20 to-indigo-500/20 border border-sky-500/20 text-white'
-                    : 'bg-white/5 border border-white/10 text-white/80'
+                  ? 'bg-gradient-to-r from-sky-500/20 to-indigo-500/20 border border-sky-500/20 text-white'
+                  : 'bg-white/5 border border-white/10 text-white/80'
                   } ${t.isFinal ? '' : 'opacity-60'}`}
               >
                 {t.text}
