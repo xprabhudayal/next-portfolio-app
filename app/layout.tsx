@@ -19,8 +19,39 @@ const courier = Courier_Prime({
 });
 
 export const metadata: Metadata = {
-    title: 'PRABHUDAYAL VAISHNAV // DEV',
-    description: 'AI ENGINEER. FULL STACK. NO NONSENSE.',
+    title: {
+        default: 'PRABHUDAYAL VAISHNAV // DEV',
+        template: '%s // PRABHUDAYAL VAISHNAV',
+    },
+    description: 'AI Engineer & Full-Stack Developer building intelligent systems.',
+    keywords: ['AI Engineer', 'Full Stack Developer', 'React', 'Next.js', 'Typescript', 'Prabhudayal Vaishnav'],
+    authors: [{ name: 'Prabhudayal Vaishnav' }],
+    creator: 'Prabhudayal Vaishnav',
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: 'https://prabhudayal.com',
+        title: 'PRABHUDAYAL VAISHNAV // DEV',
+        description: 'AI Engineer & Full-Stack Developer building intelligent systems.',
+        siteName: 'Prabhudayal Vaishnav Portfolio',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'PRABHUDAYAL VAISHNAV // DEV',
+        description: 'AI Engineer & Full-Stack Developer building intelligent systems.',
+        creator: '@prabhudayal_ai',
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
 };
 
 export default function RootLayout({
