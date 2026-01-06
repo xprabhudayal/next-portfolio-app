@@ -2,8 +2,18 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import { RESUME_DATA } from '@/components/constants';
 import { ArrowUpRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Showcase of AI and Full Stack projects by Prabhudayal Vaishnav.',
+  openGraph: {
+    title: 'Projects // PRABHUDAYAL VAISHNAV',
+    description: 'Showcase of AI and Full Stack projects by Prabhudayal Vaishnav.',
+  },
+};
 
 export default function ProjectsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
